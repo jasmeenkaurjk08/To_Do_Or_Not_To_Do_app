@@ -5,4 +5,16 @@
     <string name="add_task">+ New task</string>
     <string name="list_settings">List Settings</string>
     <string name="list_properties">List Properties</string>
+    <string name="add_new_list">Add New List</string>
+    <string name="enter_list_title">Enter List Title: </string>
+    <string name="clear_button">Clear </string>
+    <string name="save_button">Save </string>
+    <string name="add_new_task">Add New Task</string>
+    <string name="name_task">Name:</string>
+    <string name="date_task">Due Date:</string>
+    <string name="time_task">Due Time:</string>
+    <string name="priority_task">Priority:</string>
+    <string name="category_task">Category:</string>
+    <string name="subtask_task">Subtask Of:</string>
+    <string name="notes_task">Notes:</string>
 </resources>
