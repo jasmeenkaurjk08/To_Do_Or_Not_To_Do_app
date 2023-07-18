@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">To Do Or Not To Do</string>
+    <string name="add_list">+ New List</string>
+    <string name="all_lists">All Lists</string>
+    <string name="add_task">+ New task</string>
+    <string name="list_settings">List Settings</string>
+    <string name="list_properties">List Properties</string>
+</resources>
