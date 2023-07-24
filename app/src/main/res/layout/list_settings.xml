@@ -35,7 +35,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/textInputNameLs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -56,7 +56,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button17"
+            android:id="@+id/buttonInputBCLs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -77,30 +77,31 @@
             android:textSize="20sp" />
 
         <RadioGroup
+            android:id="@+id/radioGroupInputListSortLs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtonDueDateLs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_date" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/radioButtonDueTimeLs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_time" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/radioButtonPriorityLs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_priority" />
 
             <RadioButton
-                android:id="@+id/radioButton5"
+                android:id="@+id/radioButtonCategoryLs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_category" />
@@ -121,23 +122,24 @@
             android:textSize="20sp" />
 
         <RadioGroup
+            android:id="@+id/radioGroupCompletedTaskLs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <RadioButton
-                android:id="@+id/radioButton6"
+                android:id="@+id/radioButtonShowLs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_show" />
 
             <RadioButton
-                android:id="@+id/radioButton7"
+                android:id="@+id/radioButtonHideLs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_hide" />
 
             <RadioButton
-                android:id="@+id/radioButton8"
+                android:id="@+id/radioButtonDeleteLs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_delete" />

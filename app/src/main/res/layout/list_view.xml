@@ -40,7 +40,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonAddTaskLv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_task"

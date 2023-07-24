@@ -34,7 +34,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextText4"
+            android:id="@+id/textInputNameNcMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -56,7 +56,7 @@
             android:textSize="20sp" />
 
         <Spinner
-            android:id="@+id/spinner5"
+            android:id="@+id/spinnerInputFontNcMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -76,7 +76,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/buttonInputTcNcMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -97,7 +97,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button14"
+            android:id="@+id/buttonInputBcNcMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -110,14 +110,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button15"
+            android:id="@+id/buttonSaveNcMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/save_button" />
 
         <Button
-            android:id="@+id/button16"
+            android:id="@+id/buttonClearNcMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

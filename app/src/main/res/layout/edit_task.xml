@@ -36,7 +36,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextText5"
+            android:id="@+id/textInputNameEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,7 +58,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextText6"
+            android:id="@+id/textInputDueDateEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
             tools:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextText8"
+            android:id="@+id/textInputDueTimeEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -103,7 +103,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextNumber"
+            android:id="@+id/textInputPriorityEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -125,7 +125,7 @@
             tools:textSize="20sp" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerInputCategoryEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -145,7 +145,7 @@
             android:textSize="20sp" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spinnerInputSubtaskOfEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -165,7 +165,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/textInputNotesEt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -181,14 +181,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/buttonClearEt"
             android:layout_width="204dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/clear_button" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/buttonSaveEt"
             android:layout_width="204dp"
             android:layout_height="wrap_content"
             android:text="@string/save_button" />

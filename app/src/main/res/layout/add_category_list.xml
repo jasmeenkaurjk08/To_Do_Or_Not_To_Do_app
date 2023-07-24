@@ -98,7 +98,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/buttonDtColorNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -119,7 +119,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/buttonLtColorNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -140,7 +140,7 @@
             tools:textSize="20sp" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/buttonDbColorNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -161,7 +161,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/buttonLbColorNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -174,14 +174,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/buttonSaveNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/save_button" />
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/buttonClearNewCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
