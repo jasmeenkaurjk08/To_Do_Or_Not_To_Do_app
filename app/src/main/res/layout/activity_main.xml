@@ -21,6 +21,7 @@
             app:title="@string/app_name" />
 
         <include
+            android:id="@+id/contentMain"
             layout="@layout/view_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
