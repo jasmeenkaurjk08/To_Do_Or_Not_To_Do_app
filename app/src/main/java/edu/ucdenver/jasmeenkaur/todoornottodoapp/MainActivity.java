@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<List> listOfLists;
     private ListAdapter listAdapter;
     private ArrayList<Task> listOfTasks;
+    private TaskAdapter taskAdapter;
     private ArrayList<Category> listOfCategories;
+    private CategoryAdapter categoryAdapter;
 
 
     private SharedPreferences prefs;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private DataManager dm;
 
     private String currentPage;
+    private List currentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         listOfTasks = new ArrayList<Task>();
         listOfCategories = new ArrayList<Category>();
         listAdapter = new ListAdapter(this, listOfLists);
+        taskAdapter = new TaskAdapter(this, listOfTasks);
+        categoryAdapter = new CategoryAdapter(this, listOfCategories);
 
 
         // set up recycler view
@@ -69,18 +74,19 @@ public class MainActivity extends AppCompatActivity {
 
         currentPage = "view_all_lists";
         /* current pages can be:
-            view_all_lists
-            list_settings           menu_list_settings
-            view_list               menu_view_list
-            add_task                menu_back
-            view_task               menu_back
-            edit_task               menu_back
-            add_category_main       menu_back
-            add_category_list       menu_back
-            view_category_main      menu_back
-            view_category_list      menu_back
-            edit_category_main      menu_back
-            edit_category_list      menu_back
+            view_all_lists          N/A                     activity_main.xml
+            add_list                menu_back               add_list.xml
+            list_settings           menu_list_settings      list_settings.xml
+            view_list               menu_view_list          list_view.xml
+            add_task                menu_back               add_task.xml
+            view_task               menu_back               task_view.xml
+            edit_task               menu_back               edit_task.xml
+            add_category_main       menu_back               add_category_main.xml
+            add_category_list       menu_back               add_category_list.xml
+            view_category_main      menu_back               categories_view.xml
+            view_category_list      menu_back               view_category.xml
+            edit_category_main      menu_back               edit_category_main.xml
+            edit_category_list      menu_back               edit_category_list.xml
          */
     }
 
@@ -103,7 +109,85 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void addList(List newList){
+        dm.insertList(newList.getName());
+        loadData();
+    }
 
+    public void loadData(){
+        Cursor cursor;
+
+        // need to know which list we're viewing the tasks of
+        String currentListId = currentList.getId();
+        String currentListTaskSort = currentList.getTaskSort();
+
+        // determine what data to load based on what we're viewing now
+        switch (currentPage){
+            case("view_all_lists"):
+                cursor = dm.selectAllLists();
+                int listCount = cursor.getCount();
+                listOfLists.clear();
+                if(listCount > 0){
+                    while(cursor.moveToNext()){
+                        String id = cursor.getString(1);
+                        String name = cursor.getString(2);
+                        String taskSort = cursor.getString(3);
+                        String taskCompleteHandle = cursor.getString(4);
+                        String backgroundColor = cursor.getString(5);
+                        List list = new List(id, name, taskSort, taskCompleteHandle, backgroundColor);
+                        listOfLists.add(list);
+                    }
+                    listAdapter.notifyDataSetChanged();
+                }
+                break;
+            case("view_list"):
+                // get that list's tasks
+                cursor = dm.selectListTasks(currentListId, currentListTaskSort);
+                int taskCount = cursor.getCount();
+                listOfTasks.clear();
+                if(taskCount > 0){
+                    while(cursor.moveToNext()){
+                        String id = cursor.getString(1);
+                        String name = cursor.getString(2);
+                        String dueDate = cursor.getString(3);
+                        String dueTime = cursor.getString(4);
+                        String priority = cursor.getString(5);
+                        String category = cursor.getString(6);
+                        String parentTask = cursor.getString(7);
+                        String completed = cursor.getString(8);
+                        String notes = cursor.getString(9);
+                        String listID = cursor.getString(10);
+                        Task task = new Task(id, name, dueDate, dueTime, priority, category,
+                                parentTask, completed, notes, listID);
+                        listOfTasks.add(task);
+                    }
+                    taskAdapter.notifyDataSetChanged();
+                }
+                break;
+            case("view_category_list"):
+                // get that list's categories
+                cursor = dm.selectListCategories(currentListId);
+                int categoryCount = cursor.getCount();
+                listOfCategories.clear();
+                if(categoryCount > 0){
+                    while(cursor.moveToNext()){
+                        String id = cursor.getString(1);
+                        String name = cursor.getString(2);
+                        String defaultCategory = cursor.getString(3);
+                        String font = cursor.getString(4);
+                        String textColor = cursor.getString(5);
+                        String backgroundColor = cursor.getString(6);
+                        String listID = cursor.getString(7);
+                        Category category = new Category(id, name, defaultCategory, font, textColor,
+                                backgroundColor, listID);
+                        listOfCategories.add(category);
+                    }
+                    categoryAdapter.notifyDataSetChanged();
+                }
+                break;
+        }
+
+    }
 
 
 

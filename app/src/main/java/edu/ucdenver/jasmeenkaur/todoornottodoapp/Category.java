@@ -9,6 +9,18 @@ public class Category {
     private String backgroundColor;
     private String listID;
 
+    public Category(String id, String name, String defaultCategory, String font, String textColor,
+                    String backgroundColor, String listID){
+        this.id = id;
+        this.name = name;
+        this.defaultCategory = defaultCategory;
+        this.font = font;
+        this.textColor = textColor;
+        this.backgroundColor = backgroundColor;
+        this.listID = listID;
+    }
+
+
     // ======================================== getters ========================================
     public String getId(){
         return id;
