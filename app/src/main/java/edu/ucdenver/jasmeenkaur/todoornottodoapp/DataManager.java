@@ -365,7 +365,7 @@ public class DataManager {
         }
 
         @Override
-        public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        public void onCreate(SQLiteDatabase db) {
             // create table to hold different to-do lists
             String query = "create table list ("
                     + "_id integer primary key autoincrement not null,"
