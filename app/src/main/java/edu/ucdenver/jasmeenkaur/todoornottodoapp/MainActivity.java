@@ -167,9 +167,30 @@ public class MainActivity extends AppCompatActivity {
             case("view_category_list"):
                 // get that list's categories
                 cursor = dm.selectListCategories(currentListId);
-                int categoryCount = cursor.getCount();
+                int listCategoryCount = cursor.getCount();
                 listOfCategories.clear();
-                if(categoryCount > 0){
+                if(listCategoryCount > 0){
+                    while(cursor.moveToNext()){
+                        String id = cursor.getString(1);
+                        String name = cursor.getString(2);
+                        String defaultCategory = cursor.getString(3);
+                        String font = cursor.getString(4);
+                        String textColor = cursor.getString(5);
+                        String backgroundColor = cursor.getString(6);
+                        String listID = cursor.getString(7);
+                        Category category = new Category(id, name, defaultCategory, font, textColor,
+                                backgroundColor, listID);
+                        listOfCategories.add(category);
+                    }
+                    categoryAdapter.notifyDataSetChanged();
+                }
+                break;
+            case("view_category_main"):
+                // get that the default categories
+                cursor = dm.selectDefaultCategories();
+                int mainCategoryCount = cursor.getCount();
+                listOfCategories.clear();
+                if(mainCategoryCount > 0){
                     while(cursor.moveToNext()){
                         String id = cursor.getString(1);
                         String name = cursor.getString(2);
