@@ -23,7 +23,14 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/task_name" />
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -35,16 +42,14 @@
             android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/date_task" />
+            android:text="@string/date_task"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editTextDate"
+        <TextView
+            android:id="@+id/textView35"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="date" />
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -57,16 +62,15 @@
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/time_task" />
+            android:text="@string/time_task"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editTextTime"
+        <TextView
+            android:id="@+id/textView36"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="time" />
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -78,17 +82,15 @@
             android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/priority_task" />
+            android:text="@string/priority_task"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editTextText9"
+        <TextView
+            android:id="@+id/textView37"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Name" />
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -100,17 +102,15 @@
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/category_task" />
+            android:text="@string/category_task"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editTextText10"
+        <TextView
+            android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Name" />
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -122,17 +122,15 @@
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/subtask_task" />
+            android:text="@string/subtask_task"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editTextText11"
+        <TextView
+            android:id="@+id/textView39"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Name" />
+            android:layout_weight="1" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -144,15 +142,14 @@
             android:id="@+id/textView31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/notes_task" />
+            android:text="@string/notes_task"
+            android:textSize="20sp" />
 
-        <MultiAutoCompleteTextView
-            android:id="@+id/multiAutoCompleteTextView"
+        <TextView
+            android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="MultiAutoCompleteTextView" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>

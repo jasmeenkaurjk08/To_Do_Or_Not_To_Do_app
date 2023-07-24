@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/list_properties"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
     <TableRow
         android:layout_width="409dp"
@@ -30,7 +31,8 @@
             android:id="@+id/textView5"
             android:layout_width="194dp"
             android:layout_height="37dp"
-            android:text="@string/name_enter" />
+            android:text="@string/name_enter"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/editTextText"
@@ -50,7 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/background_color" />
+            android:text="@string/background_color"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/button17"
@@ -70,7 +73,8 @@
             android:layout_width="132dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/list_sort" />
+            android:text="@string/list_sort"
+            android:textSize="20sp" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -113,7 +117,8 @@
             android:id="@+id/textView34"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/completed_tasks" />
+            android:text="@string/completed_tasks"
+            android:textSize="20sp" />
 
         <RadioGroup
             android:layout_width="match_parent"

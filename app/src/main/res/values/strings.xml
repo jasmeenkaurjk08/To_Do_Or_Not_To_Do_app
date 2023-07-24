@@ -31,7 +31,6 @@
     <string name="background_color">Background Color:</string>
     <string name="view_categories">Viewing Categories:</string>
     <string name="add_categories">add Category:</string>
-    <string name="task_name">Task Name</string>
     <string name="list_sort">List Sort:</string>
     <string name="button_date">Due Date</string>
     <string name="button_time">Due Time</string>
@@ -41,4 +40,7 @@
     <string name="button_show">Show</string>
     <string name="button_hide">Hide</string>
     <string name="button_delete">Delete</string>
+    <string name="edit_category_main">Edit Category Main</string>
+    <string name="edit_category_list">Edit Category List</string>
+    <string name="edit_task">Edit Task</string>
 </resources>

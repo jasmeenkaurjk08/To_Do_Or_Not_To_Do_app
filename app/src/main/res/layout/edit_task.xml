@@ -18,7 +18,7 @@
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_task"
+        android:text="@string/edit_task"
         android:textAlignment="center"
         android:textSize="24sp" />
 
