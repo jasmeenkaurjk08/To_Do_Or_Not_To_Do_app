@@ -21,8 +21,9 @@ public class ViewListActivity extends AppCompatActivity{
     private AppBarConfiguration appBarConfiguration;
     private ListViewBinding binding;
     private DataManager dm;
-
+    private ArrayList<Task> listOfTasks;
     private List displayList;
+    private TaskAdapter taskAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,6 +34,7 @@ public class ViewListActivity extends AppCompatActivity{
 
         setSupportActionBar(binding.toolbarListView);
 
+        taskAdapter = new TaskAdapter(this, listOfTasks);
         dm = new DataManager(this);
 
         String listID = getIntent().getStringExtra("List ID");
@@ -62,6 +64,17 @@ public class ViewListActivity extends AppCompatActivity{
 
         binding.textViewListTitle.setText(displayList.getName());
 
+        binding.buttonAddTaskLv.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent addTaskIntent = new Intent(ViewListActivity.this, AddTaskActivity.class);
+                        addTaskIntent.putExtra("List ID", displayList.getId());
+                        startActivity(addTaskIntent);
+                    }
+                }
+        );
+
     }
 
     @Override
@@ -88,6 +101,41 @@ public class ViewListActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public String getDisplayListID(){
+        return displayList.getId();
+    }
+
+    public void loadData(){
+        // need to know which list we're viewing the tasks of
+        String listId = displayList.getId();
+        String listTaskSort = displayList.getTaskSort();
+        // get that list's tasks
+        Cursor cursor = dm.selectListTasks(listId, listTaskSort);
+        int taskCount = cursor.getCount();
+        listOfTasks.clear();
+        if (taskCount > 0) {
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(0);
+                String name = cursor.getString(1);
+                String dueDate = cursor.getString(2);
+                String dueTime = cursor.getString(3);
+                String priority = cursor.getString(4);
+                String completed = cursor.getString(5);
+                String notes = cursor.getString(6);
+                String listID = cursor.getString(7);
+                Task task = new Task(id, name, dueDate, dueTime, priority, completed, notes, listID);
+                listOfTasks.add(task);
+            }
+            taskAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void addTask(Task task){
+        dm.insertTask(task.getName(), task.getDueTime(), task.getDueDate(), task.getPriority(),
+                task.getNotes(), task.getListID());
+        //loadData();
     }
 
     public void onResume () {

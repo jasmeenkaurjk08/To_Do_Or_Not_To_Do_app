@@ -10,9 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.AddTaskBinding;
 
-public class AddTask extends AppCompatActivity {
+public class AddTaskActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private AddTaskBinding binding;
+    private ViewListActivity viewListActivity;
+    private String listID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -21,6 +23,8 @@ public class AddTask extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         binding.toolbarAddTask.inflateMenu(R.menu.menu_back);
+
+        listID = getIntent().getStringExtra("List ID");
 
         binding.toolbarAddTask.setOnMenuItemClickListener(
                 new Toolbar.OnMenuItemClickListener() {
@@ -63,15 +67,18 @@ public class AddTask extends AppCompatActivity {
                         String completed="false";
                         String notes=binding.textInputNotesEt.getText().toString();
                         //need id and list id
-                        Task task = new Task(name,dueDate,dueTime,priority,completed,notes);
+                        Task task = new Task("-1",name,dueDate,dueTime,priority,completed,notes, listID);
                         //MainActivity mainActivity = (MainActivity) getActivity();
-                        ViewListActivity.addTask(task);
+                        viewListActivity.addTask(task);
                         finish();
                     }
                 }
         );
+    }
 
-
+    public AddTaskActivity(ViewListActivity viewListActivity) {
+        this.viewListActivity = viewListActivity;
 
     }
+
 }

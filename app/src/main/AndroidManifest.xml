@@ -28,6 +28,9 @@
         <activity android:name=".ListSettingsActivity"
             android:exported="false"
             android:parentActivityName=".ViewListActivity"/>
+        <activity android:name=".AddTaskActivity"
+            android:exported="false"
+            android:parentActivityName=".ViewListActivity"/>
     </application>
 
 </manifest>

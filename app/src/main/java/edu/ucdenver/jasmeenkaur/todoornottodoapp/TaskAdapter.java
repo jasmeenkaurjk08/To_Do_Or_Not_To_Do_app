@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskListItemHolder> {
-    private MainActivity mainActivity;
+    private ViewListActivity viewListActivity;
     private ArrayList<Task> listOfTasks;
 
 
-    public TaskAdapter(MainActivity mainActivity, ArrayList<Task> listOfTasks) {
-        this.mainActivity = mainActivity;
+    public TaskAdapter(ViewListActivity viewListActivity, ArrayList<Task> listOfTasks) {
+        this.viewListActivity = viewListActivity;
         this.listOfTasks = listOfTasks;
 
     }

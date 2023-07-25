@@ -30,16 +30,15 @@ public class DataManager {
         }
     }
 
-    public void insertTask(String name, String dueDate, String dueTime, String priority, String category,
-                           String parentTask, String notes, String listID){
+    public void insertTask(String name, String dueDate, String dueTime, String priority, String notes, String listID){
         String query = "insert into task "
                 + "(name, due_date, due_time, priority, category, parent_task, notes, list_id) values"
                 + "(" + name + ","
                 + "(" + dueDate + ","
                 + "(" + dueTime + ","
                 + "(" + priority + ","
-                + "(" + category + ","
-                + "(" + parentTask + ","
+                //+ "(" + category + ","
+                //+ "(" + parentTask + ","
                 + "(" + notes + ","
                 + "(" + listID + ")";
         try {
@@ -153,6 +152,7 @@ public class DataManager {
         return cursor;
     }
 
+    /*
     public Cursor selectSubtasks(String id) {
         Cursor cursor = null;
         String query = "select * from tasks where parent_id is " + id;
@@ -166,6 +166,7 @@ public class DataManager {
 
         return cursor;
     }
+    */
 
     public Cursor selectTask(String id) {
         Cursor cursor = null;
@@ -304,15 +305,14 @@ public class DataManager {
             Log.i("info", "Error: could not update list information - " + e.getMessage());
         }
     }
-    public void updateTask(String id, String name, String dueDate, String dueTime, String priority, String category,
-                           String parentTask, String notes){
+    public void updateTask(String id, String name, String dueDate, String dueTime, String priority, String notes){
         String query = "update task set"
                 + "name = " + name
                 + "due_date = " + dueDate
                 + "due_time = " + dueTime
                 + "priority = " + priority
-                + "category = " + category
-                + "parent_task = " + parentTask
+                //+ "category = " + category
+                //+ "parent_task = " + parentTask
                 + "notes = " + notes
                 + "where _id = " + id;
 
@@ -377,8 +377,8 @@ public class DataManager {
                     + "due_date,"
                     + "due_time,"
                     + "priority,"
-                    + "category,"
-                    + "parent_task,"
+                    //+ "category,"
+                    //+ "parent_task,"
                     + "completed default 'false',"
                     + "notes,"
                     + "list_id"
