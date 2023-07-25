@@ -16,36 +16,35 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/toolbarListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:contextClickable="true"
-            android:labelFor="@id/textView"
+            android:labelFor="@id/textViewListTitle"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewListTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="24sp" />
 
         <include
+            android:id="@+id/contentListView"
             layout="@layout/view_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <Button
+            android:id="@+id/buttonAddTaskLv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_task" />
 
-    <Button
-        android:id="@+id/buttonAddTaskLv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_task"
-        app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="bottom|center" />
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

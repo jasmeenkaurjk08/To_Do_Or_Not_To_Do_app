@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        //loadData();
+        loadData();
 
     }
 
@@ -129,8 +129,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showList(int position){
+        String listToDisplayID = listOfLists.get(position).getId();
+        Log.i("info", "List to display ID (in main): " + listToDisplayID);
         Intent viewListIntent = new Intent(this, ViewListActivity.class);
+        viewListIntent.putExtra("List ID", listToDisplayID);
         startActivity(viewListIntent);
+
     }
 
     public void loadData(){

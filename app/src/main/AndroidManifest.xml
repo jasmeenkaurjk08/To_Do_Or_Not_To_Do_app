@@ -22,9 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewListActivity">
-
-        </activity>
+        <activity android:name=".ViewListActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ListSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".ViewListActivity"/>
     </application>
 
 </manifest>

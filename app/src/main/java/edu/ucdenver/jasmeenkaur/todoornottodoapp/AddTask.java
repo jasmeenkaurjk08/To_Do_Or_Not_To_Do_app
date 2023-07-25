@@ -29,7 +29,7 @@ public class AddTask extends AppCompatActivity {
                         int id = item.getItemId();
 
                         if (id == R.id.action_back) {
-                            dismiss();
+                            finish();
 
                         }
 
