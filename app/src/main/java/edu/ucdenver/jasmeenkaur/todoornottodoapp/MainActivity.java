@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -88,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
             edit_category_main      menu_back               edit_category_main.xml
             edit_category_list      menu_back               edit_category_list.xml
          */
+        binding.buttonNewListMain.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //AddTask addContactDialog = new AddContactDialog();
+                        //addContactDialog.show(getSupportFragmentManager(), "");
+                    }
+                }
+        );
     }
 
     @Override
