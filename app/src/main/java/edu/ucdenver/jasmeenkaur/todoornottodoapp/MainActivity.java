@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         dm.insertList(list.getName());
         loadData();
     }
+    public void addTask(Task task){
+        dm.insertList(task.getName());
+        loadData();
+    }
 
     public void showList(int position){
         String listToDisplayID = listOfLists.get(position).getId();
@@ -183,13 +187,14 @@ public class MainActivity extends AppCompatActivity {
                     String completed = cursor.getString(7);
                     String notes = cursor.getString(8);
                     String listID = cursor.getString(9);
-                    Task task = new Task(id, name, dueDate, dueTime, priority, completed, notes, listID);
+                    Task task = new Task(id, name, dueDate, dueTime, priority, category,
+                            parentTask, completed, notes, listID);
                     listOfTasks.add(task);
                 }
                 taskAdapter.notifyDataSetChanged();
             }
         }
-        */
+         */
         else if(currentPage == "view_category_list") {
             // need to know which list we're viewing the tasks of
             currentListId = currentList.getId();

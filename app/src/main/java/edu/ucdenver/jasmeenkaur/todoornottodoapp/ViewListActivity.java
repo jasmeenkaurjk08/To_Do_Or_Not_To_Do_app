@@ -135,7 +135,7 @@ public class ViewListActivity extends AppCompatActivity{
     public void addTask(Task task){
         dm.insertTask(task.getName(), task.getDueTime(), task.getDueDate(), task.getPriority(),
                 task.getNotes(), task.getListID());
-        //loadData();
+        loadData();
     }
 
     public void onResume () {
