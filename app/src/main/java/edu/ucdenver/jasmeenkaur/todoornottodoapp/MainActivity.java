@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         dm.insertList(list.getName());
         loadData();
     }
+    public void addTask(Task task){
+        dm.insertList(task.getName());
+        loadData();
+    }
 
     public void showList(int position){
         Intent viewListIntent = new Intent(this, ViewListActivity.class);
