@@ -26,6 +26,8 @@ public class ListSettingsActivity extends AppCompatActivity{
         setContentView(view);
 
         setSupportActionBar(binding.toolbarListSettings);
+        binding.radioButtonDueDateLs.setChecked(true);
+        binding.radioButtonShowLs.setChecked(true);
     }
 
     @Override
