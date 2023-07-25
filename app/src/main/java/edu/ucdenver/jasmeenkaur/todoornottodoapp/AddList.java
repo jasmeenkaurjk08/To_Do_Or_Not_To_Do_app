@@ -63,10 +63,10 @@ public class AddList extends DialogFragment {
                     public void onClick(View v) {
                         String name = binding.textInputListTitleAd.getText().toString();
 
-                        List list = new List(name);
+                        //List list = new List(name);
 
                         MainActivity mainActivity = (MainActivity) getActivity();
-                        mainActivity.addList(list);
+                        mainActivity.addList(name);
                         dismiss();
                     }
                 }

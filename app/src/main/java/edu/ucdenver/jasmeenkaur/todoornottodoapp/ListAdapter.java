@@ -34,7 +34,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ListItemHolder holder, int position) {
         List thisList = listOfLists.get(position);
-        holder.textViewListName.setText(thisList.getName());
+        holder.textViewListItem.setText(thisList.getName());
 
     }
 
@@ -45,13 +45,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
 
     public class ListItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView textViewListName;
+        private TextView textViewListItem;
 
         public ListItemHolder (View itemView) {
             super(itemView);
-            textViewListName = itemView.findViewById(R.id.textViewListItem);
-            textViewListName.setClickable(true);
-            textViewListName.setOnClickListener(this);
+            textViewListItem = itemView.findViewById(R.id.textViewListItem);
+            textViewListItem.setClickable(true);
+            textViewListItem.setOnClickListener(this);
 
 
         }

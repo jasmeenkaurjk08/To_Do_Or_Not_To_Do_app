@@ -18,23 +18,10 @@ public class DataManager {
 
     // =================================== insert functions ===================================
     public void insertList(String name){
-        // get all the default categories
-        Cursor cursor = selectDefaultCategories();
-        int categoryCount = cursor.getCount();
-        ArrayList<String> catList = new ArrayList<String>();
-        if (categoryCount > 0) {
-            while (cursor.moveToNext()) {
-                String id = cursor.getString(1);
-                catList.add(id);
-            }
-        }
-
         // create new empty list using user-entered name
         String query = "insert into list "
-                + "(name, categories) values"
-                + "(" + name + ","
-                + catList +
-                ")";
+                + "(name) values"
+                + "('" + name + "')";
         try {
             db.execSQL(query);
         }
@@ -372,7 +359,7 @@ public class DataManager {
                     + "name text not null,"
                     + "task_sort default 'due_date',"
                     + "task_complete_handle default 'show',"
-                    + "background_color default '#FFFFFFFF'"
+                    + "background_color default 'white'"
                     + ")";
 
             try {

@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        loadData();
+
     }
 
     @Override
@@ -119,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void addList(List newList){
-        dm.insertList(newList.getName());
+    public void addList(String listName){
+        dm.insertList(listName);
         loadData();
     }
 
@@ -128,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor;
 
         // need to know which list we're viewing the tasks of
-        String currentListId = currentList.getId();
-        String currentListTaskSort = currentList.getTaskSort();
+        String currentListId;
+        String currentListTaskSort;
 
         // determine what data to load based on what we're viewing now
         switch (currentPage){
@@ -137,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 cursor = dm.selectAllLists();
                 int listCount = cursor.getCount();
                 listOfLists.clear();
-                if(listCount > 0){
+                if(listCount > 1){
                     while(cursor.moveToNext()){
                         String id = cursor.getString(1);
                         String name = cursor.getString(2);
@@ -151,6 +154,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case("view_list"):
+                // need to know which list we're viewing the tasks of
+                currentListId = currentList.getId();
+                currentListTaskSort = currentList.getTaskSort();
                 // get that list's tasks
                 cursor = dm.selectListTasks(currentListId, currentListTaskSort);
                 int taskCount = cursor.getCount();
@@ -175,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case("view_category_list"):
+                // need to know which list we're viewing the tasks of
+                currentListId = currentList.getId();
                 // get that list's categories
                 cursor = dm.selectListCategories(currentListId);
                 int listCategoryCount = cursor.getCount();
