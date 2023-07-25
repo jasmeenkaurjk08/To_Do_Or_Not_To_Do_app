@@ -1,6 +1,7 @@
 package edu.ucdenver.jasmeenkaur.todoornottodoapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -99,32 +100,33 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        loadData();
+        //loadData();
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        switch (currentPage){
-            case "view_all_lists":
-                break;
-            case "list_settings":
-                getMenuInflater().inflate(R.menu.menu_list_settings, menu);
-                break;
-            case "view_list":
-                getMenuInflater().inflate(R.menu.menu_view_list, menu);
-                break;
-            default:
-                getMenuInflater().inflate(R.menu.menu_back, menu);
-                break;
+        if(currentPage == "list_settings"){
+            getMenuInflater().inflate(R.menu.menu_list_settings, menu);
+        }
+        else if(currentPage == "view_list"){
+            getMenuInflater().inflate(R.menu.menu_view_list, menu);
+        }
+        else if (currentPage != "view_all_lists"){
+            getMenuInflater().inflate(R.menu.menu_back, menu);
         }
         return true;
     }
 
-    public void addList(String listName){
-        dm.insertList(listName);
+    public void addList(List list){
+        dm.insertList(list.getName());
         loadData();
+    }
+
+    public void showList(int position){
+        Intent viewListIntent = new Intent(this, ViewListActivity.class);
+        startActivity(viewListIntent);
     }
 
     public void loadData(){
@@ -135,95 +137,97 @@ public class MainActivity extends AppCompatActivity {
         String currentListTaskSort;
 
         // determine what data to load based on what we're viewing now
-        switch (currentPage){
-            case("view_all_lists"):
-                cursor = dm.selectAllLists();
-                int listCount = cursor.getCount();
-                listOfLists.clear();
-                if(listCount > 1){
-                    while(cursor.moveToNext()){
-                        String id = cursor.getString(1);
-                        String name = cursor.getString(2);
-                        String taskSort = cursor.getString(3);
-                        String taskCompleteHandle = cursor.getString(4);
-                        String backgroundColor = cursor.getString(5);
-                        List list = new List(id, name, taskSort, taskCompleteHandle, backgroundColor);
-                        listOfLists.add(list);
-                    }
-                    listAdapter.notifyDataSetChanged();
+        if (currentPage == "view_all_lists") {
+            cursor = dm.selectAllLists();
+            int listCount = cursor.getCount();
+            Log.i("info", "Number of lists to display: " + listCount);
+            listOfLists.clear();
+            if (listCount > 0) {
+                while (cursor.moveToNext()) {
+                    String id = cursor.getString(0);
+                    String name = cursor.getString(1);
+                    String taskSort = cursor.getString(2);
+                    String taskCompleteHandle = cursor.getString(3);
+                    String backgroundColor = cursor.getString(4);
+                    Log.i("info", "Current List Info:" + id + ", " + name + ", " + taskSort
+                            + ", " + taskCompleteHandle + ", " + backgroundColor);
+                    List list = new List(id, name, taskSort, taskCompleteHandle, backgroundColor);
+                    listOfLists.add(list);
                 }
-                break;
-            case("view_list"):
-                // need to know which list we're viewing the tasks of
-                currentListId = currentList.getId();
-                currentListTaskSort = currentList.getTaskSort();
-                // get that list's tasks
-                cursor = dm.selectListTasks(currentListId, currentListTaskSort);
-                int taskCount = cursor.getCount();
-                listOfTasks.clear();
-                if(taskCount > 0){
-                    while(cursor.moveToNext()){
-                        String id = cursor.getString(1);
-                        String name = cursor.getString(2);
-                        String dueDate = cursor.getString(3);
-                        String dueTime = cursor.getString(4);
-                        String priority = cursor.getString(5);
-                        String category = cursor.getString(6);
-                        String parentTask = cursor.getString(7);
-                        String completed = cursor.getString(8);
-                        String notes = cursor.getString(9);
-                        String listID = cursor.getString(10);
-                        Task task = new Task(id, name, dueDate, dueTime, priority, category,
-                                parentTask, completed, notes, listID);
-                        listOfTasks.add(task);
-                    }
-                    taskAdapter.notifyDataSetChanged();
+                listAdapter.notifyDataSetChanged();
+            }
+            Log.i("info", "Current List Info:" + listOfLists);
+        }
+        else if (currentPage == "view_list") {
+            // need to know which list we're viewing the tasks of
+            currentListId = currentList.getId();
+            currentListTaskSort = currentList.getTaskSort();
+            // get that list's tasks
+            cursor = dm.selectListTasks(currentListId, currentListTaskSort);
+            int taskCount = cursor.getCount();
+            listOfTasks.clear();
+            if (taskCount > 0) {
+                while (cursor.moveToNext()) {
+                    String id = cursor.getString(0);
+                    String name = cursor.getString(1);
+                    String dueDate = cursor.getString(2);
+                    String dueTime = cursor.getString(3);
+                    String priority = cursor.getString(4);
+                    String category = cursor.getString(5);
+                    String parentTask = cursor.getString(6);
+                    String completed = cursor.getString(7);
+                    String notes = cursor.getString(8);
+                    String listID = cursor.getString(9);
+                    Task task = new Task(id, name, dueDate, dueTime, priority, category,
+                            parentTask, completed, notes, listID);
+                    listOfTasks.add(task);
                 }
-                break;
-            case("view_category_list"):
-                // need to know which list we're viewing the tasks of
-                currentListId = currentList.getId();
-                // get that list's categories
-                cursor = dm.selectListCategories(currentListId);
-                int listCategoryCount = cursor.getCount();
-                listOfCategories.clear();
-                if(listCategoryCount > 0){
-                    while(cursor.moveToNext()){
-                        String id = cursor.getString(1);
-                        String name = cursor.getString(2);
-                        String defaultCategory = cursor.getString(3);
-                        String font = cursor.getString(4);
-                        String textColor = cursor.getString(5);
-                        String backgroundColor = cursor.getString(6);
-                        String listID = cursor.getString(7);
-                        Category category = new Category(id, name, defaultCategory, font, textColor,
-                                backgroundColor, listID);
-                        listOfCategories.add(category);
-                    }
-                    categoryAdapter.notifyDataSetChanged();
+                taskAdapter.notifyDataSetChanged();
+            }
+        }
+        else if(currentPage == "view_category_list") {
+            // need to know which list we're viewing the tasks of
+            currentListId = currentList.getId();
+            // get that list's categories
+            cursor = dm.selectListCategories(currentListId);
+            int listCategoryCount = cursor.getCount();
+            listOfCategories.clear();
+            if (listCategoryCount > 0) {
+                while (cursor.moveToNext()) {
+                    String id = cursor.getString(0);
+                    String name = cursor.getString(1);
+                    String defaultCategory = cursor.getString(2);
+                    String font = cursor.getString(3);
+                    String textColor = cursor.getString(4);
+                    String backgroundColor = cursor.getString(5);
+                    String listID = cursor.getString(6);
+                    Category category = new Category(id, name, defaultCategory, font, textColor,
+                            backgroundColor, listID);
+                    listOfCategories.add(category);
                 }
-                break;
-            case("view_category_main"):
-                // get that the default categories
-                cursor = dm.selectDefaultCategories();
-                int mainCategoryCount = cursor.getCount();
-                listOfCategories.clear();
-                if(mainCategoryCount > 0){
-                    while(cursor.moveToNext()){
-                        String id = cursor.getString(1);
-                        String name = cursor.getString(2);
-                        String defaultCategory = cursor.getString(3);
-                        String font = cursor.getString(4);
-                        String textColor = cursor.getString(5);
-                        String backgroundColor = cursor.getString(6);
-                        String listID = cursor.getString(7);
-                        Category category = new Category(id, name, defaultCategory, font, textColor,
-                                backgroundColor, listID);
-                        listOfCategories.add(category);
-                    }
-                    categoryAdapter.notifyDataSetChanged();
+                categoryAdapter.notifyDataSetChanged();
+            }
+        }
+        else if(currentPage == "view_category_main"){
+            // get that the default categories
+            cursor = dm.selectDefaultCategories();
+            int mainCategoryCount = cursor.getCount();
+            listOfCategories.clear();
+            if(mainCategoryCount > 0){
+                while(cursor.moveToNext()){
+                    String id = cursor.getString(0);
+                    String name = cursor.getString(1);
+                    String defaultCategory = cursor.getString(2);
+                    String font = cursor.getString(3);
+                    String textColor = cursor.getString(4);
+                    String backgroundColor = cursor.getString(5);
+                    String listID = cursor.getString(6);
+                    Category category = new Category(id, name, defaultCategory, font, textColor,
+                        backgroundColor, listID);
+                    listOfCategories.add(category);
                 }
-                break;
+                categoryAdapter.notifyDataSetChanged();
+            }
         }
 
     }
@@ -232,5 +236,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume () {
         super.onResume();
+        loadData();
     }
 }

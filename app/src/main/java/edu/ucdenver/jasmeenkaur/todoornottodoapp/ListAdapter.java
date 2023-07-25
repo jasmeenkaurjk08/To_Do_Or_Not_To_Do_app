@@ -1,5 +1,6 @@
 package edu.ucdenver.jasmeenkaur.todoornottodoapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
     @NonNull
     @Override
     public ListAdapter.ListItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View listItem = LayoutInflater.from (parent.getContext())
                 .inflate(R.layout.list_layout, parent, false);
         return new ListItemHolder(listItem);
@@ -35,7 +35,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
     public void onBindViewHolder(@NonNull ListAdapter.ListItemHolder holder, int position) {
         List thisList = listOfLists.get(position);
         holder.textViewListItem.setText(thisList.getName());
-
+        Log.i("info", "onBindViewHolder setText list name: " + thisList.getName());
     }
 
     @Override
@@ -52,14 +52,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemHolder
             textViewListItem = itemView.findViewById(R.id.textViewListItem);
             textViewListItem.setClickable(true);
             textViewListItem.setOnClickListener(this);
-
-
         }
 
         public void onClick (View view) {
             // Action to perform when user click on this view
             // Want to view all of the tasks in the list (switch from activity_main to list_view)
-            //mainActivity.showContact(getAdapterPosition());
+            mainActivity.showList(getAdapterPosition());
         }
 
     }

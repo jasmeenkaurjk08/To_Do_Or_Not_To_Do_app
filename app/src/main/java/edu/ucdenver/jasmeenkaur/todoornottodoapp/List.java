@@ -16,6 +16,10 @@ public class List {
     }
     public List(String name){
         this.name = name;
+        this.taskSort = "due_date";
+        this.taskCompleteHandle = "show";
+        this.backgroundColor = "white";
+
     }
 
     // ======================================== getters ========================================
