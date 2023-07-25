@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //AddTask addContactDialog = new AddContactDialog();
-                        //addContactDialog.show(getSupportFragmentManager(), "");
+                        AddList addList = new AddList();
+                        addList.show(getSupportFragmentManager(), "");
                     }
                 }
         );

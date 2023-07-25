@@ -14,6 +14,9 @@ public class List {
         this.taskCompleteHandle = taskCompleteHandle;
         this.backgroundColor = backgroundColor;
     }
+    public List(String name){
+        this.name = name;
+    }
 
     // ======================================== getters ========================================
     public String getId() {
