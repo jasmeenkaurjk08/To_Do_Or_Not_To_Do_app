@@ -46,7 +46,6 @@ public class AddTask extends AppCompatActivity {
                         binding.textInputDueDateEt.setText("");
                         binding.textInputDueTimeEt.setText("");
                         binding.textInputPriorityEt.setText("");
-                        //clear scroll bar
                         binding.textInputNotesEt.setText("");
                         binding.textInputNameAt.requestFocus();
                     }
@@ -61,13 +60,13 @@ public class AddTask extends AppCompatActivity {
                         String dueDate=binding.textInputDueDateEt.getText().toString();
                         String dueTime=binding.textInputDueTimeEt.getText().toString();
                         String priority=binding.textInputPriorityEt.getText().toString();
-                        //figure out scroll bar, parentTask,completed, listId
+                        String completed="false";
                         String notes=binding.textInputNotesEt.getText().toString();
-                        //Task task = new Task(name,dueDate,dueTime,priority,notes);
-
-                        MainActivity mainActivity = (MainActivity) getActivity();
-                        mainActivity.addTask(task);
-                        dismiss();
+                        //need id and list id
+                        Task task = new Task(name,dueDate,dueTime,priority,completed,notes);
+                        //MainActivity mainActivity = (MainActivity) getActivity();
+                        ViewListActivity.addTask(task);
+                        finish();
                     }
                 }
         );

@@ -6,21 +6,21 @@ public class Task {
     private String dueDate;
     private String dueTime;
     private String priority;
-    private String category;
-    private String parentTask;
+    //private String category;
+    //private String parentTask;
     private String completed;
     private String notes;
     private String listID;
 
-    public Task(String id, String name, String dueDate, String dueTime, String priority, String category,
-                String parentTask, String completed, String notes, String listID){
+    public Task(String id, String name, String dueDate, String dueTime, String priority,
+                String completed, String notes, String listID){
         this.id = id;
         this.name = name;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
         this.priority = priority;
-        this.category = category;
-        this.parentTask = parentTask;
+        //this.category = category;
+        //this.parentTask = parentTask;
         this.completed = completed;
         this.notes = notes;
         this.listID = listID;
@@ -42,12 +42,12 @@ public class Task {
     public String getPriority() {
         return priority;
     }
-    public String getCategory() {
-        return category;
-    }
-    public String getParentTask() {
-        return parentTask;
-    }
+    //public String getCategory() {
+        //return category;
+    //}
+    //public String getParentTask() {
+        //return parentTask;
+    //}
     public String getCompleted() {
         return completed;
     }
@@ -74,12 +74,12 @@ public class Task {
     public void setPriority(String priority) {
         this.priority = priority;
     }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    public void setParentTask(String parentTask) {
-        this.parentTask = parentTask;
-    }
+    //public void setCategory(String category) {
+        //this.category = category;
+    //}
+    //public void setParentTask(String parentTask) {
+        //this.parentTask = parentTask;
+    //}
     public void setCompleted(String completed) {
         this.completed = completed;
     }
