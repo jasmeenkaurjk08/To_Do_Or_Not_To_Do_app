@@ -26,6 +26,8 @@ public class ListSettingsActivity extends AppCompatActivity{
         View view = binding.getRoot();
         setContentView(view);
 
+        String listID = getIntent().getStringExtra("List ID");
+
         setSupportActionBar(binding.toolbarListSettings);
         binding.radioButtonDueDateLs.setChecked(true);
         binding.radioButtonShowLs.setChecked(true);
@@ -35,6 +37,7 @@ public class ListSettingsActivity extends AppCompatActivity{
                     public void onClick(View v) {
                         Log.i("info", "Showing color wheel background list settings");
                         Intent ColorWheelIntent = new Intent(ListSettingsActivity.this, ColorWheelActivity.class);
+                        ColorWheelIntent.putExtra("List ID", listID);
                         startActivity(ColorWheelIntent);
                     }
                 }

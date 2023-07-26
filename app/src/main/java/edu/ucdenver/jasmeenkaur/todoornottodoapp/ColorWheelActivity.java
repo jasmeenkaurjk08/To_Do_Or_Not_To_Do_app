@@ -21,10 +21,14 @@ public class ColorWheelActivity extends AppCompatActivity{
     // this is the default color of the preview box
     private int mDefaultColor;
 
+    private DataManager dm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.color_wheel);
+
+        String listID = getIntent().getStringExtra("List ID");
 
         // register the GFG text with appropriate ID
         gfgTextView = findViewById(R.id.gfg_heading);
@@ -40,6 +44,9 @@ public class ColorWheelActivity extends AppCompatActivity{
 
         // set the default color to 0 as it is black
         mDefaultColor = 0;
+
+        // create our database
+        dm = new DataManager(this);
 
         // button open the AmbilWanra color picker dialog.
         mPickColorButton.setOnClickListener(
@@ -67,6 +74,7 @@ public class ColorWheelActivity extends AppCompatActivity{
                         //View listViewing = findViewById(R.id.buttonAddTaskLv);
                         //View root = listViewing.getRootView();
                         v.setBackgroundColor(mDefaultColor);
+                        dm.updateListBackgroundColor(listID, String.valueOf(mDefaultColor));
                         finish();
                     }
                 });
