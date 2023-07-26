@@ -32,15 +32,15 @@ public class DataManager {
 
     public void insertTask(String name, String dueDate, String dueTime, String priority, String notes, String listID){
         String query = "insert into task "
-                + "(name, due_date, due_time, priority, category, parent_task, notes, list_id) values"
-                + "(" + name + ","
-                + "(" + dueDate + ","
-                + "(" + dueTime + ","
-                + "(" + priority + ","
+                + "(name, due_date, due_time, priority, notes, list_id) values"
+                + "(\"" + name + "\","
+                + "\"" + dueDate + "\","
+                + "\"" + dueTime + "\","
+                + "\"" + priority + "\","
                 //+ "(" + category + ","
                 //+ "(" + parentTask + ","
-                + "(" + notes + ","
-                + "(" + listID + ")";
+                + "\"" + notes + "\","
+                + "\"" + listID + "\")";
         try {
             db.execSQL(query);
         }
@@ -110,9 +110,9 @@ public class DataManager {
         return cursor;
     }
 
-    public Cursor selectListTasks(String listId, String sortBy) {
+    public Cursor selectListTasks(String listId) {
         Cursor cursor = null;
-        String query = "select * from tasks where list_id is " + listId + " order by " + sortBy;
+        String query = "select * from task where list_id is \"" + listId + "\"";
 
         try {
             cursor = db.rawQuery(query, null);
@@ -126,7 +126,7 @@ public class DataManager {
 
     public Cursor selectListCompleteTasks(String listId, String sortBy) {
         Cursor cursor = null;
-        String query = "select * from tasks where list_id is " + listId + " and completed is 'true' order by " + sortBy;
+        String query = "select * from task where list_id is " + listId + " and completed is 'true' order by " + sortBy;
 
         try {
             cursor = db.rawQuery(query, null);
@@ -140,7 +140,7 @@ public class DataManager {
 
     public Cursor selectListIncompleteTasks(String listId, String sortBy) {
         Cursor cursor = null;
-        String query = "select * from tasks where list_id is " + listId + " and completed is 'false' order by " + sortBy;
+        String query = "select * from task where list_id is " + listId + " and completed is 'false' order by " + sortBy;
 
         try {
             cursor = db.rawQuery(query, null);
@@ -170,7 +170,7 @@ public class DataManager {
 
     public Cursor selectTask(String id) {
         Cursor cursor = null;
-        String query = "select * from tasks where _id is " + id;
+        String query = "select * from task where _id is " + id;
 
         try {
             cursor = db.rawQuery(query, null);
@@ -359,7 +359,7 @@ public class DataManager {
                     + "name text not null,"
                     + "task_sort default 'due_date',"
                     + "task_complete_handle default 'show',"
-                    + "background_color integer default 0xFFFFFFFF"
+                    + "background_color integer default ffffffff"
                     + ")";
 
             try {

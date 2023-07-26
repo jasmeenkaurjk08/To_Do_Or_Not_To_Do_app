@@ -1,7 +1,11 @@
 package edu.ucdenver.jasmeenkaur.todoornottodoapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,7 +17,6 @@ import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.ListViewBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,7 +38,17 @@ public class ViewListActivity extends AppCompatActivity{
 
         setSupportActionBar(binding.toolbarListView);
 
+        listOfTasks = new ArrayList<Task>();
         taskAdapter = new TaskAdapter(this, listOfTasks);
+
+        // set up recycler view
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+
+        binding.contentListView.recyclerViewList.setLayoutManager(layoutManager);
+        binding.contentListView.recyclerViewList.addItemDecoration(
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        binding.contentListView.recyclerViewList.setAdapter(taskAdapter);
+
         dm = new DataManager(this);
 
         String listID = getIntent().getStringExtra("List ID");
@@ -64,14 +77,16 @@ public class ViewListActivity extends AppCompatActivity{
         }
 
         binding.textViewListTitle.setText(displayList.getName());
-        binding.viewListLayout.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+        //binding.viewListLayout.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
         binding.buttonAddTaskLv.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Log.i("info", "Showing color wheel background list settings");
-                        Intent AddTaskIntent = new Intent(ViewListActivity.this, AddTaskActivity.class);
-                        startActivity(AddTaskIntent);
+
+                        AddTask addTaskDialog = new AddTask();
+                        addTaskDialog.show(getSupportFragmentManager(), "");
+
                     }
                 }
         );
@@ -91,6 +106,7 @@ public class ViewListActivity extends AppCompatActivity{
                 }
         );
            */
+        loadData();
     }
 
     @Override
@@ -140,9 +156,11 @@ public class ViewListActivity extends AppCompatActivity{
         }
         String listTaskSort = displayList.getTaskSort();
         // get that list's tasks
-        Cursor cursorTasks = dm.selectListTasks(listId, listTaskSort);
+        Cursor cursorTasks = dm.selectListTasks(listId);
         if(cursorTasks != null) {
+            Log.i("info", "cursorTasks != null");
             int taskCount = cursorTasks.getCount();
+            Log.i("info", "Number of tasks to display: " + taskCount);
             listOfTasks.clear();
             if (taskCount > 0) {
                 while (cursorTasks.moveToNext()) {
@@ -154,23 +172,31 @@ public class ViewListActivity extends AppCompatActivity{
                     String completed = cursorTasks.getString(5);
                     String notes = cursorTasks.getString(6);
                     String listID = cursorTasks.getString(7);
+                    Log.i("info", "Task to be displayed in ViewListActivity: \n\tName: "
+                            + name + "\n\tDue Date: " + dueDate + "\n\tDue Time: " + dueTime +
+                            "\n\tPriority: " + priority + "\n\tCompleted: " + completed +
+                            "\n\tNotes: " + notes + "\n\tList ID: " + listID);
                     Task task = new Task(id, name, dueDate, dueTime, priority, completed, notes, listID);
                     listOfTasks.add(task);
                 }
                 taskAdapter.notifyDataSetChanged();
             }
         }
-        binding.viewListLayout.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+        //binding.viewListLayout.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
     }
 
-    public void addTask(Task task){
+    public void addTask(@NonNull Task task){
+        if(task == null){
+            Log.i("info", "THE CREATED TASK IS NULL (ViewListActivity");
+        }
+        Log.i("info", "Display List ID: " + displayList.getId());
         dm.insertTask(task.getName(), task.getDueTime(), task.getDueDate(), task.getPriority(),
-                task.getNotes(), task.getListID());
+                task.getNotes(), displayList.getId());
         loadData();
     }
 
     public void openNewTask(){
-        Intent intent = new Intent(this, AddTaskActivity.class);
+        Intent intent = new Intent(this, AddTask.class);
         intent.putExtra("List ID", displayList.getId());
         startActivity(intent);
     }

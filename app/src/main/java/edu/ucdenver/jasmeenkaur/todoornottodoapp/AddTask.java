@@ -1,32 +1,37 @@
 package edu.ucdenver.jasmeenkaur.todoornottodoapp;
 
+import androidx.navigation.ui.AppBarConfiguration;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 
-import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.DialogAddTaskBinding;
+import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.AddTaskBinding;
 
-public class AddTaskActivity extends DialogFragment {
-    private AppBarConfiguration appBarConfiguration;
-    private DialogAddTaskBinding binding;
-    private ViewListActivity viewListActivity;
+
+
+public class AddTask extends DialogFragment {
+    //private AppBarConfiguration appBarConfiguration;
+    private AddTaskBinding binding;
+    //private ViewListActivity viewListActivity;
     private String listID;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
-        binding = DialogAddTaskBinding.inflate(LayoutInflater.from(getContext()));
+        binding = AddTaskBinding.inflate(LayoutInflater.from(getContext()));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(binding.getRoot());
         binding.toolbarAddTask.inflateMenu(R.menu.menu_back);
-        listID = getIntent().getStringExtra("List ID");
+        listID = "-1";
 
         binding.toolbarAddTask.setOnMenuItemClickListener(
                 new Toolbar.OnMenuItemClickListener() {
@@ -35,7 +40,7 @@ public class AddTaskActivity extends DialogFragment {
                         int id = item.getItemId();
 
                         if (id == R.id.action_back) {
-                            finish();
+                            dismiss();
                         }
 
                         return false;
@@ -67,19 +72,49 @@ public class AddTaskActivity extends DialogFragment {
                         String priority=binding.textInputPriorityEt.getText().toString();
                         String completed="false";
                         String notes=binding.textInputNotesEt.getText().toString();
+                        Log.i("info", "Task to add information in Add Task Dialog: \n\tName: "
+                                + name + "\n\tDue Date: " + dueDate + "\n\tDue Time: " + dueTime +
+                                "\n\tPriority: " + priority + "\n\tCompleted: " + completed +
+                                "\n\tNotes: " + notes + "\n\tList ID: " + listID);
+                        // check if any are null
+                        if(name == null){
+                            Log.i("info", "NAME IS NULL");
+                            name = "";
+                        }
+                        if(dueDate == null){
+                            Log.i("info", "DUE DATE IS NULL");
+                            dueDate = "";
+                        }
+                        if(dueTime == null){
+                            Log.i("info", "DUE TIME IS NULL");
+                            dueTime = "";
+                        }
+                        if(priority == null){
+                            Log.i("info", "PRIORITY IS NULL");
+                            priority = "";
+                        }
+                        if(notes == null){
+                            Log.i("info", "NOTES IS NULL");
+                            notes = "";
+                        }
+
+
                         //need id and list id
-                        Task task = new Task("-1",name,dueDate,dueTime,priority,completed,notes, listID);
+                        Task task = new Task(listID,name,dueDate,dueTime,priority,completed, notes, listID);
                         //MainActivity mainActivity = (MainActivity) getActivity();
+                        ViewListActivity viewListActivity = (ViewListActivity) getActivity();
+                        if(task == null){
+                            Log.i("info", "THE CREATED TASK IS NULL");
+                        }
                         viewListActivity.addTask(task);
-                        finish();
+                        dismiss();
                     }
                 }
         );
+        return builder.create();
     }
 
-    public AddTaskActivity(ViewListActivity viewListActivity) {
-        this.viewListActivity = viewListActivity;
-
-    }
 
 }
+
+
