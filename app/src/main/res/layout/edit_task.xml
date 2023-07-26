@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/time_task"
-            tools:textSize="20sp" />
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/textInputDueTimeEt"
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/category_task"
-            tools:textSize="20sp" />
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/spinnerInputCategoryEt"

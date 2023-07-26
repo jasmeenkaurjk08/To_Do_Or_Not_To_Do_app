@@ -91,8 +91,10 @@ public class ViewTaskActivity extends AppCompatActivity {
             finish();
         }
         else if (id == R.id.action_edit_task) {
-            Intent EditTaskIntent = new Intent(this, EditTaskActivity.class);
-            startActivity(EditTaskIntent);
+            //Intent EditTaskIntent = new Intent(this, EditTaskActivity.class);
+            //startActivity(EditTaskIntent);
+            EditTaskActivity editTask = new EditTaskActivity();
+            editTask.show(getSupportFragmentManager(), "");
         }
 
         return super.onOptionsItemSelected(item);

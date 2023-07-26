@@ -34,6 +34,9 @@
         <activity android:name=".ColorWheelActivity"
             android:exported="false"
             android:parentActivityName=".ListSettingsActivity"/>
+        <activity android:name=".EditTaskActivity"
+            android:exported="false"
+            android:parentActivityName=".ViewTaskActivity"/>
     </application>
 
 </manifest>
