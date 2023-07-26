@@ -359,14 +359,14 @@ public class DataManager {
                     + "name text not null,"
                     + "task_sort default 'due_date',"
                     + "task_complete_handle default 'show',"
-                    + "background_color default 'white'"
+                    + "background_color integer default 0xFFFFFFFF"
                     + ")";
 
             try {
                 db.execSQL(query);
             }
             catch (SQLException e){
-                Log.i("info", "Error: could not create list table - " + e.getMessage());
+                Log.i("error", "Error: could not create list table - " + e.getMessage());
             }
 
 
@@ -388,7 +388,7 @@ public class DataManager {
                 db.execSQL(query);
             }
             catch (SQLException e){
-                Log.i("info", "Error: could not create task table - " + e.getMessage());
+                Log.i("error", "Error: could not create task table - " + e.getMessage());
             }
 
 
@@ -407,7 +407,7 @@ public class DataManager {
                 db.execSQL(query);
             }
             catch (SQLException e){
-                Log.i("info", "Error: could not create category table - " + e.getMessage());
+                Log.i("error", "Error: could not create category table - " + e.getMessage());
             }
         }
 
