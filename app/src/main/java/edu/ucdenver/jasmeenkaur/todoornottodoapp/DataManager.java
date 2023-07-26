@@ -110,9 +110,9 @@ public class DataManager {
         return cursor;
     }
 
-    public Cursor selectListTasks(String listId) {
+    public Cursor selectListTasks(String listId, String sortBy) {
         Cursor cursor = null;
-        String query = "select * from task where list_id is \"" + listId + "\"";
+        String query = "select * from task where list_id is \"" + listId + "\" order by " + sortBy +" asc";
 
         try {
             cursor = db.rawQuery(query, null);

@@ -156,7 +156,7 @@ public class ViewListActivity extends AppCompatActivity{
         }
         String listTaskSort = displayList.getTaskSort();
         // get that list's tasks
-        Cursor cursorTasks = dm.selectListTasks(listId);
+        Cursor cursorTasks = dm.selectListTasks(listId, listTaskSort);
         if(cursorTasks != null) {
             Log.i("info", "cursorTasks != null");
             int taskCount = cursorTasks.getCount();
