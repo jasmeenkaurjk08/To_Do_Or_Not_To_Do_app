@@ -195,10 +195,13 @@ public class ViewListActivity extends AppCompatActivity{
         loadData();
     }
 
-    public void openNewTask(){
-        Intent intent = new Intent(this, AddTask.class);
-        intent.putExtra("List ID", displayList.getId());
-        startActivity(intent);
+    public void showTask(int position){
+        String taskToDisplayID = listOfTasks.get(position).getId();
+        Log.i("info", "Task to display ID (in viewListActivity): " + taskToDisplayID);
+        Intent viewTaskIntent = new Intent(this, ViewTaskActivity.class);
+        viewTaskIntent.putExtra("Task ID", taskToDisplayID);
+        startActivity(viewTaskIntent);
+
     }
 
     public void onResume () {

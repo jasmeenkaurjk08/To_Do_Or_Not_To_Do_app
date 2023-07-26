@@ -32,8 +32,10 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbarTaskView);
 
-        String taskID = getIntent().getStringExtra("List ID");
+        String taskID = getIntent().getStringExtra("Task ID");
         Log.i("info", "Task to display ID: " + taskID);
+
+        dm = new DataManager(this);
 
         if(taskID != "0"){
             Cursor cursor = dm.selectTask(taskID);
@@ -66,7 +68,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         binding.textViewTaskDueDateTv.setText(displayTask.getDueDate());
         binding.textViewTaskDueTimeTv.setText(displayTask.getDueTime());
         binding.textViewTaskPriorityTv.setText(displayTask.getPriority());
-        binding.checkBox.setText(displayTask.getCompleted());
+        binding.checkBox.setChecked(Boolean.valueOf(displayTask.getCompleted()));
         binding.textViewNotesTv.setText(displayTask.getNotes());
     }
 
