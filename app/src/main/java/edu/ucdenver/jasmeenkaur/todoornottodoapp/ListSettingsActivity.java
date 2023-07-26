@@ -71,10 +71,10 @@ public class ListSettingsActivity extends AppCompatActivity{
 
         // return to view all list
         if (id == R.id.action_back) {
-            //finish();
-            Intent i=new Intent(this, ViewListActivity.class);
+            finish();
+            //Intent i=new Intent(this, ViewListActivity.class);
             //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
+            //startActivity(i);
         }
         else if (id == R.id.action_save) {
             finish();

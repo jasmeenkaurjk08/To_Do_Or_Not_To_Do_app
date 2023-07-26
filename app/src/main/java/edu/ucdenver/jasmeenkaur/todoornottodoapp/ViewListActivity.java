@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.ListViewBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,8 +31,12 @@ public class ViewListActivity extends AppCompatActivity{
     private List displayList;
     private TaskAdapter taskAdapter;
 
+    public static Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        activity = this;
+
         super.onCreate(savedInstanceState);
         binding = ListViewBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -78,6 +84,12 @@ public class ViewListActivity extends AppCompatActivity{
 
         binding.textViewListTitle.setText(displayList.getName());
         //binding.viewListLayout.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+        Activity activity = ViewListActivity.activity;
+        LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.viewListViewLayout);
+        bgElement.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+
+        Log.i("info", "Number for Background Color: " + Integer.parseInt(displayList.getBackgroundColor()));
+
         binding.buttonAddTaskLv.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -131,6 +143,7 @@ public class ViewListActivity extends AppCompatActivity{
             Intent listSettingsIntent = new Intent(this, ListSettingsActivity.class);
             listSettingsIntent.putExtra("List ID", displayList.getId());
             startActivity(listSettingsIntent);
+            loadData();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -182,7 +195,11 @@ public class ViewListActivity extends AppCompatActivity{
                 taskAdapter.notifyDataSetChanged();
             }
         }
-        //binding.viewListLayout.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+        Activity activity = ViewListActivity.activity;
+        LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.viewListViewLayout);
+        bgElement.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+
+        Log.i("info", "Number for Background Color: " + Integer.parseInt(displayList.getBackgroundColor()));
     }
 
     public void addTask(@NonNull Task task){
@@ -205,6 +222,7 @@ public class ViewListActivity extends AppCompatActivity{
     }
 
     public void onResume () {
+        loadData();
         super.onResume();
     }
 
