@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -81,6 +82,7 @@ public class ColorWheelActivity extends AppCompatActivity{
                         LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.linearLIstSettings);
                         bgElement.setBackgroundColor(mDefaultColor);
                         dm.updateListBackgroundColor(listID, String.valueOf(mDefaultColor));
+                        Log.i("info", "Color Wheel Activity Color Display: " + mDefaultColor);
                         finish();
                     }
                 });

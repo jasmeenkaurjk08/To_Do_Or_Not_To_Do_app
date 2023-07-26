@@ -21,7 +21,7 @@ public class DataManager {
         // create new empty list using user-entered name
         String query = "insert into list "
                 + "(name) values"
-                + "('" + name + "')";
+                + "(\"" + name + "\")";
         try {
             db.execSQL(query);
         }
@@ -53,12 +53,12 @@ public class DataManager {
                                String backgroundColor, String listID){
         String query = "insert into category "
                 + "(name, default_category, font, text_color, background_color, list_id) values"
-                + "(" + name + ","
-                + "(" + defaultCategory + ","
-                + "(" + font + ","
-                + "(" + textColor + ","
-                + "(" + backgroundColor + ","
-                + "(" + listID + ")";
+                + "(\"" + name + "\","
+                + "\"" + defaultCategory + "\","
+                + "\"" + font + "\","
+                + "\"" + textColor + "\","
+                + "\"" + backgroundColor + "\","
+                + "\"" + listID + "\")";
         try {
             db.execSQL(query);
         }
@@ -70,13 +70,13 @@ public class DataManager {
 
     // =================================== delete functions ===================================
     public void deleteList (int id) {
-        String query = "delete from list where _id = " + id;
+        String query = "delete from list where _id = \"" + id + "\"";
     }
     public void deleteTask (int id) {
-        String query = "delete from task where _id = " + id;
+        String query = "delete from task where _id = \"" + id + "\"";
     }
     public void deleteCategory (int id) {
-        String query = "delete from category where _id = " + id;
+        String query = "delete from category where _id = \"" + id + "\"";
     }
 
 
@@ -84,7 +84,7 @@ public class DataManager {
     // =================================== select functions ===================================
     public Cursor selectList(String id) {
         Cursor cursor = null;
-        String query = "select * from list where _id is " + id;
+        String query = "select * from list where _id is \"" + id + "\"";
 
         try {
             cursor = db.rawQuery(query, null);
@@ -126,7 +126,7 @@ public class DataManager {
 
     public Cursor selectListCompleteTasks(String listId, String sortBy) {
         Cursor cursor = null;
-        String query = "select * from task where list_id is " + listId + " and completed is 'true' order by " + sortBy;
+        String query = "select * from task where list_id is \"" + listId + "\" and completed is 'true' order by " + sortBy;
 
         try {
             cursor = db.rawQuery(query, null);
@@ -140,7 +140,7 @@ public class DataManager {
 
     public Cursor selectListIncompleteTasks(String listId, String sortBy) {
         Cursor cursor = null;
-        String query = "select * from task where list_id is " + listId + " and completed is 'false' order by " + sortBy;
+        String query = "select * from task where list_id is \"" + listId + "\" and completed is 'false' order by " + sortBy;
 
         try {
             cursor = db.rawQuery(query, null);
@@ -198,7 +198,7 @@ public class DataManager {
 
     public Cursor selectListCategories(String listId) {
         Cursor cursor = null;
-        String query = "select * from category where list_id is " + listId;
+        String query = "select * from category where list_id is \"" + listId + "\"";
 
         try {
             cursor = db.rawQuery(query, null);
@@ -212,7 +212,7 @@ public class DataManager {
 
     public Cursor selectCategory(String id) {
         Cursor cursor = null;
-        String query = "select * from category where _id is " + id;
+        String query = "select * from category where _id is \"" + id + "\"";
 
         try {
             cursor = db.rawQuery(query, null);
@@ -229,8 +229,8 @@ public class DataManager {
     // update list values  -------------------------------------------------------------------------
     public void updateListName(String id, String name){
         String query = "update list set"
-                + "name = " + name
-                + "where _id = " + id;
+                + "name = \"" + name
+                + "\" where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -241,8 +241,8 @@ public class DataManager {
     }
     public void updateListTaskSort(String id, String taskSort){
         String query = "update list set"
-                + "task_sort = " + taskSort
-                + "where _id = " + id;
+                + "task_sort = \"" + taskSort
+                + "\" where _id = " + id + "\"";
 
         try {
             db.execSQL(query);
@@ -253,8 +253,8 @@ public class DataManager {
     }
     public void updateListTaskCompleteHandle(String id, String taskCompleteHandle){
         String query = "update list set"
-                + "task_complete_handle = " + taskCompleteHandle
-                + "where _id = " + id;
+                + "task_complete_handle = \"" + taskCompleteHandle
+                + "\" where _id = " + id + "\"";
 
         try {
             db.execSQL(query);
@@ -264,9 +264,9 @@ public class DataManager {
         }
     }
     public void updateListBackgroundColor(String id, String backgroundColor){
-        String query = "update list set"
-                + "background_color = " + backgroundColor
-                + "where _id = " + id;
+        String query = "update list set "
+                + "background_color = \"" + backgroundColor
+                + "\" where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -278,11 +278,11 @@ public class DataManager {
     public void updateList(String id, String name, String taskSort, String taskCompleteHandle,
                            String backgroundColor){
         String query = "update list set"
-                + "name = " + name
-                + "task_sort = " + taskSort
-                + "task_complete_handle = " + taskCompleteHandle
-                + "background_color = " + backgroundColor
-                + "where _id = " + id;
+                + "name = \"" + name + "\""
+                + "task_sort = \"" + taskSort + "\""
+                + "task_complete_handle = \"" + taskCompleteHandle + "\""
+                + "background_color = \"" + backgroundColor + "\""
+                + "where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -295,8 +295,8 @@ public class DataManager {
     // update task values --------------------------------------------------------------------------
     public void updateTaskComplete(String id, String completed){
         String query = "update task set"
-                + "completed = " + completed
-                + "where _id = " + id;
+                + "completed = \"" + completed
+                + "\" where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -307,14 +307,14 @@ public class DataManager {
     }
     public void updateTask(String id, String name, String dueDate, String dueTime, String priority, String notes){
         String query = "update task set"
-                + "name = " + name
-                + "due_date = " + dueDate
-                + "due_time = " + dueTime
-                + "priority = " + priority
+                + "name = \"" + name + "\""
+                + "due_date = \"" + dueDate + "\""
+                + "due_time = \"" + dueTime + "\""
+                + "priority = \"" + priority + "\""
                 //+ "category = " + category
                 //+ "parent_task = " + parentTask
-                + "notes = " + notes
-                + "where _id = " + id;
+                + "notes = \"" + notes + "\""
+                + "where _id \"= " + id + "\"";
 
         try {
             db.execSQL(query);
@@ -328,12 +328,12 @@ public class DataManager {
     public void updateCategory(String id, String name, String defaultCategory, String font, String textColor,
                                String backgroundColor) {
         String query = "update category set"
-                + "name = " + name
-                + "default_category = " + defaultCategory
-                + "font = " + font
-                + "text_color = " + textColor
-                + "background_color = " + backgroundColor
-                + "where _id = " + id;
+                + "name = \"" + name + "\""
+                + "default_category = \"" + defaultCategory + "\""
+                + "font = \"" + font + "\""
+                + "text_color = \"" + textColor + "\""
+                + "background_color = \"" + backgroundColor + "\""
+                + "where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -359,7 +359,7 @@ public class DataManager {
                     + "name text not null,"
                     + "task_sort default 'due_date',"
                     + "task_complete_handle default 'show',"
-                    + "background_color integer default ffffffff"
+                    + "background_color integer default '-1'"
                     + ")";
 
             try {
