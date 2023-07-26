@@ -1,30 +1,30 @@
 package edu.ucdenver.jasmeenkaur.todoornottodoapp;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 
-import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.AddTaskBinding;
+import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.DialogAddTaskBinding;
 
-public class AddTaskActivity extends AppCompatActivity {
+public class AddTaskActivity extends DialogFragment {
     private AppBarConfiguration appBarConfiguration;
-    private AddTaskBinding binding;
+    private DialogAddTaskBinding binding;
     private ViewListActivity viewListActivity;
     private String listID;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        //super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_new);
-        //binding = AddTaskBinding.inflate(getLayoutInflater());
-        //View view = binding.getRoot();
-        //setContentView(view);
-        setContentView(R.layout.add_task);
+    public Dialog onCreateDialog(Bundle savedInstanceState){
+        binding = DialogAddTaskBinding.inflate(LayoutInflater.from(getContext()));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(binding.getRoot());
         binding.toolbarAddTask.inflateMenu(R.menu.menu_back);
         listID = getIntent().getStringExtra("List ID");
 
