@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
 
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewListLayout"
+    android:id="@+id/viewListViewLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#A32424"
     android:contextClickable="true"
+    android:orientation="vertical"
     tools:context="@string/all_lists">
-
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -30,26 +30,26 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
-        <TextView
-            android:id="@+id/textViewListTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-        <include
-            android:id="@+id/contentListView"
-            layout="@layout/view_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/buttonAddTaskLv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_task" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:id="@+id/textViewListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <include
+        android:id="@+id/contentListView"
+        layout="@layout/view_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonAddTaskLv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_task" />
+
+
+</LinearLayout>

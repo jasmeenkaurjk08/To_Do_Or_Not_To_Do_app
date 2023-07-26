@@ -1,8 +1,15 @@
 package edu.ucdenver.jasmeenkaur.todoornottodoapp;
 //Source: https://www.geeksforgeeks.org/how-to-create-a-basic-color-picker-tool-in-android/
+import static android.app.PendingIntent.getActivity;
+
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -25,11 +32,11 @@ public class ColorWheelActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.color_wheel);
 
         String listID = getIntent().getStringExtra("List ID");
-
         // register the GFG text with appropriate ID
         gfgTextView = findViewById(R.id.gfg_heading);
 
@@ -70,15 +77,16 @@ public class ColorWheelActivity extends AppCompatActivity{
                         // variable its value will be changed as
                         // soon as ok button is clicked from the
                         // color picker dialog.
-                        //gfgTextView.setTextColor(mDefaultColor);
-                        //View listViewing = findViewById(R.id.buttonAddTaskLv);
-                        //View root = listViewing.getRootView();
-                        v.setBackgroundColor(mDefaultColor);
+                        Activity activity = ListSettingsActivity.activity;
+                        LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.linearLIstSettings);
+                        bgElement.setBackgroundColor(mDefaultColor);
                         dm.updateListBackgroundColor(listID, String.valueOf(mDefaultColor));
                         finish();
                     }
                 });
     }
+
+
 
     // the dialog functionality is handled separately
     // using openColorPickerDialog this is triggered as
@@ -117,3 +125,5 @@ public class ColorWheelActivity extends AppCompatActivity{
         colorPickerDialogue.show();
     }
 }
+
+
