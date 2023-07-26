@@ -15,16 +15,23 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.ArrayList;
+
 import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.EditTaskBinding;
 
 public class EditTaskActivity extends DialogFragment {
     //private AppBarConfiguration appBarConfiguration;
     private EditTaskBinding binding;
-    private DataManager dm;
+    private Task displayTask;
     //public static Activity activity;
     //private ViewListActivity viewListActivity;
     private String listID;
     private ViewTaskActivity viewTaskActivity;
+
+    public EditTaskActivity(ViewTaskActivity viewTaskActivity) {
+        this.viewTaskActivity = viewTaskActivity;
+
+    }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         //activity = this;
@@ -36,35 +43,9 @@ public class EditTaskActivity extends DialogFragment {
         //listID = "-1";
         String taskID = viewTaskActivity.getDisplayTaskID();
         Log.i("info", "Task to display ID: " + taskID);
-        viewTaskActivity=new ViewTaskActivity;
-        dm = new DataManager (this);
+        //dm = new DataManager (this);
 
-        if(taskID != "0"){
-            Cursor cursor = dm.selectTask(taskID);
-            int listCount = cursor.getCount();
-            Log.i("info", "Number of lists to display: " + listCount);
-            //String id, String name, String dueDate, String dueTime, String priority,
-            //String completed, String notes, String listID
-            while(cursor.moveToNext()) {
-                String id = cursor.getString(0);
-                String name = cursor.getString(1);
-                String dueDate = cursor.getString(2);
-                String dueTime = cursor.getString(3);
-                String priority = cursor.getString(4);
-                String completed = cursor.getString(5);
-                String notes = cursor.getString(6);
-                String listID= cursor.getString(7);
-                Log.i("info", "Current Task Info:" + id + ", " + name + ", " + dueDate
-                        + ", " + dueTime + ", " + priority+ ", " + completed + ", " + notes);
-                displayTask = new Task(id, name, dueDate, dueTime , priority, completed, notes, listID);
-            }
-        }
-        else{
-            String errorMessage = "ERROR: Could not load task information";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, errorMessage, duration);
-            toast.show();
-        }
+        displayTask = viewTaskActivity.taskToEdit();
 
         binding.textInputNameEt.setHint(displayTask.getName());
         binding.textInputDueDateEt.setHint(displayTask.getDueDate());
@@ -115,37 +96,34 @@ public class EditTaskActivity extends DialogFragment {
                                 + name + "\n\tDue Date: " + dueDate + "\n\tDue Time: " + dueTime +
                                 "\n\tPriority: " + priority + "\n\tCompleted: " + completed +
                                 "\n\tNotes: " + notes + "\n\tList ID: " + listID);
+
                         // check if any are null
-                        if(name == null){
+                        if(name == null || name.equals("")){
                             Log.i("info", "NAME IS NULL");
-                            name = "";
+                            name = displayTask.getName();
                         }
-                        if(dueDate == null){
+                        if(dueDate == null || dueDate.equals("")){
                             Log.i("info", "DUE DATE IS NULL");
-                            dueDate = "";
+                            dueDate = displayTask.getDueDate();
                         }
-                        if(dueTime == null){
+                        if(dueTime == null || dueTime.equals("")){
                             Log.i("info", "DUE TIME IS NULL");
-                            dueTime = "";
+                            dueTime = displayTask.getDueTime();
                         }
-                        if(priority == null){
+                        if(priority == null || priority.equals("")){
                             Log.i("info", "PRIORITY IS NULL");
-                            priority = "";
+                            priority = displayTask.getPriority();
                         }
-                        if(notes == null){
+                        if(notes == null || notes.equals("")){
                             Log.i("info", "NOTES IS NULL");
-                            notes = "";
+                            notes = displayTask.getNotes();
                         }
 
 
                         //need id and list id
                         Task task = new Task(listID,name,dueDate,dueTime,priority,completed, notes, listID);
                         //MainActivity mainActivity = (MainActivity) getActivity();
-                        ViewListActivity viewListActivity = (ViewListActivity) getActivity();
-                        if(task == null){
-                            Log.i("info", "THE CREATED TASK IS NULL");
-                        }
-                        viewListActivity.addTask(task);
+                        viewTaskActivity.updateTask(task);
                         dismiss();
                     }
                 }

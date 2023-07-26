@@ -169,7 +169,7 @@ public class ViewListActivity extends AppCompatActivity{
         }
         String listTaskSort = displayList.getTaskSort();
         // get that list's tasks
-        Cursor cursorTasks = dm.selectListTasks(listId, listTaskSort);
+        Cursor cursorTasks = dm.selectListTasks(listId);
         if(cursorTasks != null) {
             Log.i("info", "cursorTasks != null");
             int taskCount = cursorTasks.getCount();
@@ -200,6 +200,14 @@ public class ViewListActivity extends AppCompatActivity{
         bgElement.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
 
         Log.i("info", "Number for Background Color: " + Integer.parseInt(displayList.getBackgroundColor()));
+
+        // sort the list
+        String listSort = displayList.getTaskSort();
+
+        switch(listSort){
+            case "due_date":
+        }
+
     }
 
     public void addTask(@NonNull Task task){
@@ -207,7 +215,7 @@ public class ViewListActivity extends AppCompatActivity{
             Log.i("info", "THE CREATED TASK IS NULL (ViewListActivity");
         }
         Log.i("info", "Display List ID: " + displayList.getId());
-        dm.insertTask(task.getName(), task.getDueTime(), task.getDueDate(), task.getPriority(),
+        dm.insertTask(task.getName(), task.getDueDate(), task.getDueTime(), task.getPriority(),
                 task.getNotes(), displayList.getId());
         loadData();
     }

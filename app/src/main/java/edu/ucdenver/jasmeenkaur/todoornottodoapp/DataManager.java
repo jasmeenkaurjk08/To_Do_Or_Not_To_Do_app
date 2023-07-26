@@ -110,9 +110,9 @@ public class DataManager {
         return cursor;
     }
 
-    public Cursor selectListTasks(String listId, String sortBy) {
+    public Cursor selectListTasks(String listId) {
         Cursor cursor = null;
-        String query = "select * from task where list_id is \"" + listId + "\" order by " + sortBy +" asc";
+        String query = "select * from task where list_id is \"" + listId;
 
         try {
             cursor = db.rawQuery(query, null);
@@ -228,7 +228,7 @@ public class DataManager {
     // =================================== update functions ===================================
     // update list values  -------------------------------------------------------------------------
     public void updateListName(String id, String name){
-        String query = "update list set"
+        String query = "update list set "
                 + "name = \"" + name
                 + "\" where _id = \"" + id + "\"";
 
@@ -240,9 +240,9 @@ public class DataManager {
         }
     }
     public void updateListTaskSort(String id, String taskSort){
-        String query = "update list set"
+        String query = "update list set "
                 + "task_sort = \"" + taskSort
-                + "\" where _id = " + id + "\"";
+                + "\" where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -252,7 +252,7 @@ public class DataManager {
         }
     }
     public void updateListTaskCompleteHandle(String id, String taskCompleteHandle){
-        String query = "update list set"
+        String query = "update list set "
                 + "task_complete_handle = \"" + taskCompleteHandle
                 + "\" where _id = " + id + "\"";
 
@@ -277,11 +277,11 @@ public class DataManager {
     }
     public void updateList(String id, String name, String taskSort, String taskCompleteHandle,
                            String backgroundColor){
-        String query = "update list set"
-                + "name = \"" + name + "\""
-                + "task_sort = \"" + taskSort + "\""
-                + "task_complete_handle = \"" + taskCompleteHandle + "\""
-                + "background_color = \"" + backgroundColor + "\""
+        String query = "update list set "
+                + "name = \"" + name + "\","
+                + "task_sort = \"" + taskSort + "\","
+                + "task_complete_handle = \"" + taskCompleteHandle + "\","
+                + "background_color = \"" + backgroundColor + "\","
                 + "where _id = \"" + id + "\"";
 
         try {
@@ -294,7 +294,7 @@ public class DataManager {
 
     // update task values --------------------------------------------------------------------------
     public void updateTaskComplete(String id, String completed){
-        String query = "update task set"
+        String query = "update task set "
                 + "completed = \"" + completed
                 + "\" where _id = \"" + id + "\"";
 
@@ -306,15 +306,15 @@ public class DataManager {
         }
     }
     public void updateTask(String id, String name, String dueDate, String dueTime, String priority, String notes){
-        String query = "update task set"
-                + "name = \"" + name + "\""
-                + "due_date = \"" + dueDate + "\""
-                + "due_time = \"" + dueTime + "\""
-                + "priority = \"" + priority + "\""
+        String query = "update task set "
+                + "name = \"" + name + "\", "
+                + "due_date = \"" + dueDate + "\", "
+                + "due_time = \"" + dueTime + "\", "
+                + "priority = \"" + priority + "\", "
                 //+ "category = " + category
                 //+ "parent_task = " + parentTask
-                + "notes = \"" + notes + "\""
-                + "where _id \"= " + id + "\"";
+                + "notes = \"" + notes + "\" "
+                + "where _id = \"" + id + "\"";
 
         try {
             db.execSQL(query);
@@ -327,12 +327,12 @@ public class DataManager {
     // update category values ----------------------------------------------------------------------
     public void updateCategory(String id, String name, String defaultCategory, String font, String textColor,
                                String backgroundColor) {
-        String query = "update category set"
-                + "name = \"" + name + "\""
-                + "default_category = \"" + defaultCategory + "\""
-                + "font = \"" + font + "\""
-                + "text_color = \"" + textColor + "\""
-                + "background_color = \"" + backgroundColor + "\""
+        String query = "update category set "
+                + "name = \"" + name + "\","
+                + "default_category = \"" + defaultCategory + "\","
+                + "font = \"" + font + "\","
+                + "text_color = \"" + textColor + "\","
+                + "background_color = \"" + backgroundColor + "\","
                 + "where _id = \"" + id + "\"";
 
         try {

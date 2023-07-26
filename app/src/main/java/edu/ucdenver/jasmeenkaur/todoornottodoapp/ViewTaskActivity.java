@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -93,7 +94,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         else if (id == R.id.action_edit_task) {
             //Intent EditTaskIntent = new Intent(this, EditTaskActivity.class);
             //startActivity(EditTaskIntent);
-            EditTaskActivity editTask = new EditTaskActivity();
+            EditTaskActivity editTask = new EditTaskActivity(this);
             editTask.show(getSupportFragmentManager(), "");
         }
 
@@ -103,6 +104,21 @@ public class ViewTaskActivity extends AppCompatActivity {
     public String getDisplayTaskID(){
         return displayTask.getId();
     }
+
+    public Task taskToEdit(){
+        return displayTask;
+    }
+
+    public void updateTask(@NonNull Task task){
+        if(task == null){
+            Log.i("info", "THE CREATED TASK IS NULL (ViewListActivity");
+        }
+        Log.i("info", "Display Task ID: " + displayTask.getId());
+        dm.updateTask(displayTask.getId(), task.getName(), task.getDueDate(), task.getDueTime(), task.getPriority(),
+                task.getNotes());
+        //(String id, String name, String dueDate, String dueTime, String priority, String notes)
+    }
+
  /*
     public void loadData(){
         // need to know which list we're viewing the tasks of
