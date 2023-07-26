@@ -43,4 +43,8 @@
     <string name="edit_category_main">Edit Category Main</string>
     <string name="edit_category_list">Edit Category List</string>
     <string name="edit_task">Edit Task</string>
+    <string name="selecting_color">Selecting Color</string>
+    <string name="button_choose_color">Select Color</string>
+    <string name="color_selected">Here is the color you selected:</string>
+    <string name="button_finish_color">Set Color</string>
 </resources>

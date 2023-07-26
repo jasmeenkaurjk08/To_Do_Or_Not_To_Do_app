@@ -13,6 +13,7 @@ import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.ListViewBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -63,18 +64,32 @@ public class ViewListActivity extends AppCompatActivity{
         }
 
         binding.textViewListTitle.setText(displayList.getName());
-
         binding.buttonAddTaskLv.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent addTaskIntent = new Intent(ViewListActivity.this, AddTaskActivity.class);
-                        addTaskIntent.putExtra("List ID", displayList.getId());
-                        startActivity(addTaskIntent);
+                        Log.i("info", "Showing color wheel background list settings");
+                        Intent AddTaskIntent = new Intent(ViewListActivity.this, AddTaskActivity.class);
+                        startActivity(AddTaskIntent);
                     }
                 }
         );
-
+        /*
+        binding.buttonAddTaskLv.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //AppCompatActivity activity= (AppCompatActivity) view.getContext();
+                        //AddTaskActivity addTaskActivity= new AddTaskActivity(ViewListActivity.this);
+                        //startActivity(addTaskActivity);
+                        Intent addTaskIntent = new Intent(ViewListActivity.this, AddTaskActivity.class);
+                        addTaskIntent.putExtra("List ID", displayList.getId());
+                        //startActivity(addTaskIntent);
+                        ViewListActivity.this.startActivity(addTaskIntent);
+                    }
+                }
+        );
+           */
     }
 
     @Override
@@ -136,6 +151,12 @@ public class ViewListActivity extends AppCompatActivity{
         dm.insertTask(task.getName(), task.getDueTime(), task.getDueDate(), task.getPriority(),
                 task.getNotes(), task.getListID());
         loadData();
+    }
+
+    public void openNewTask(){
+        Intent intent = new Intent(this, AddTaskActivity.class);
+        intent.putExtra("List ID", displayList.getId());
+        startActivity(intent);
     }
 
     public void onResume () {

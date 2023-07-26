@@ -19,11 +19,13 @@ public class AddTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        binding = AddTaskBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        //super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_new);
+        //binding = AddTaskBinding.inflate(getLayoutInflater());
+        //View view = binding.getRoot();
+        //setContentView(view);
+        setContentView(R.layout.add_task);
         binding.toolbarAddTask.inflateMenu(R.menu.menu_back);
-
         listID = getIntent().getStringExtra("List ID");
 
         binding.toolbarAddTask.setOnMenuItemClickListener(
@@ -34,7 +36,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
                         if (id == R.id.action_back) {
                             finish();
-
                         }
 
                         return false;

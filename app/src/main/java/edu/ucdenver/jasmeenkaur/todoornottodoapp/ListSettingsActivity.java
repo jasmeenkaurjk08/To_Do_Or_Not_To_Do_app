@@ -5,6 +5,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import edu.ucdenver.jasmeenkaur.todoornottodoapp.databinding.ListSettingsBinding;
@@ -28,6 +29,16 @@ public class ListSettingsActivity extends AppCompatActivity{
         setSupportActionBar(binding.toolbarListSettings);
         binding.radioButtonDueDateLs.setChecked(true);
         binding.radioButtonShowLs.setChecked(true);
+        binding.buttonInputBCLs.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("info", "Showing color wheel background list settings");
+                        Intent ColorWheelIntent = new Intent(ListSettingsActivity.this, ColorWheelActivity.class);
+                        startActivity(ColorWheelIntent);
+                    }
+                }
+        );
     }
 
     @Override
