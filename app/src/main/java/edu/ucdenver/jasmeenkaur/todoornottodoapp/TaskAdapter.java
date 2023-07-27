@@ -59,6 +59,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskListItemHo
             // Action to perform when user click on this view
             // Want to view a specific task from the list (switch from list_view to task_view)
             viewListActivity.showTask(getAdapterPosition());
+            viewListActivity.loadData();
         }
 
     }

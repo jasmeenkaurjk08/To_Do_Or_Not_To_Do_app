@@ -71,6 +71,18 @@ public class ViewTaskActivity extends AppCompatActivity {
         binding.textViewTaskPriorityTv.setText(displayTask.getPriority());
         binding.checkBox.setChecked(Boolean.valueOf(displayTask.getCompleted()));
         binding.textViewNotesTv.setText(displayTask.getNotes());
+
+        binding.buttonDeleteTaskEt.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteTask(displayTask);
+                        finish();
+                    }
+                }
+        );
+
+
     }
 
     @Override
@@ -119,6 +131,17 @@ public class ViewTaskActivity extends AppCompatActivity {
         //(String id, String name, String dueDate, String dueTime, String priority, String notes)
     }
 
+
+    public void deleteTask(@NonNull Task task){
+        if(task == null){
+            Log.i("info", "THE TASK TO DELETE IS NULL (ViewListActivity");
+        }
+        Log.i("info", "VIEW TASK: the task to delete is " + task.getId());
+        dm.deleteTask(task.getId());
+    }
+
+
+
  /*
     public void loadData(){
         // need to know which list we're viewing the tasks of
@@ -146,7 +169,5 @@ public class ViewTaskActivity extends AppCompatActivity {
     }
 */
 
-    public void onResume () {
-        super.onResume();
-    }
+    public void onResume () {super.onResume();}
 }

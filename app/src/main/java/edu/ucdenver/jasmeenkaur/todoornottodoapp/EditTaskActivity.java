@@ -128,6 +128,7 @@ public class EditTaskActivity extends DialogFragment {
                     }
                 }
         );
+
         return builder.create();
     }
 

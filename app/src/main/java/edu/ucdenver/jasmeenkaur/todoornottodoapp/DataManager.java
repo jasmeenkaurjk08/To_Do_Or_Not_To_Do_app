@@ -69,11 +69,23 @@ public class DataManager {
 
 
     // =================================== delete functions ===================================
-    public void deleteList (int id) {
+    public void deleteList (String id) {
         String query = "delete from list where _id = \"" + id + "\"";
+        try {
+            db.execSQL(query);
+        }
+        catch (SQLException e) {
+            Log.i("info", "Error: could not delete list - " + e.getMessage());
+        }
     }
-    public void deleteTask (int id) {
+    public void deleteTask (String id) {
         String query = "delete from task where _id = \"" + id + "\"";
+        try {
+            db.execSQL(query);
+        }
+        catch (SQLException e) {
+            Log.i("info", "Error: could not delete task - " + e.getMessage());
+        }
     }
     public void deleteCategory (int id) {
         String query = "delete from category where _id = \"" + id + "\"";

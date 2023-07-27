@@ -53,6 +53,14 @@ public class ListSettingsActivity extends AppCompatActivity{
                     }
                 }
         );
+        binding.buttonDeleteListLS.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                }
+        );
     }
 
     @Override

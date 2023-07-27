@@ -98,7 +98,6 @@ public class ViewListActivity extends AppCompatActivity{
 
                         AddTask addTaskDialog = new AddTask();
                         addTaskDialog.show(getSupportFragmentManager(), "");
-
                     }
                 }
         );
@@ -145,6 +144,7 @@ public class ViewListActivity extends AppCompatActivity{
             startActivity(listSettingsIntent);
             loadData();
         }
+        loadData();
         return super.onOptionsItemSelected(item);
     }
 
@@ -220,12 +220,47 @@ public class ViewListActivity extends AppCompatActivity{
         Intent viewTaskIntent = new Intent(this, ViewTaskActivity.class);
         viewTaskIntent.putExtra("Task ID", taskToDisplayID);
         startActivity(viewTaskIntent);
+        loadData();
+    }
 
+    public void deleteList(@NonNull List list){
+        if(list == null){
+            Log.i("info", "THE LIST TO DELETE IS NULL (ViewListActivity");
+        }
+        Log.i("info", "VIEW TASK: the list to delete is " + list.getId());
+        dm.deleteList(list.getId());
+        finish();
+    }
+    public void deleteTask(@NonNull Task task){
+        if(task == null){
+            Log.i("info", "THE TASK TO DELETE IS NULL (ViewListActivity");
+        }
+        Log.i("info", "VIEW TASK: the task to delete is " + task.getId());
+        dm.deleteTask(task.getId());
+        loadData();
+    }
+    public List getList(String id){
+        List list = new List("name");
+        Cursor cursor = dm.selectList(id);
+        int listCount = cursor.getCount();
+        Log.i("info", "Number of lists to display: " + listCount);
+        //String id, String name, String dueDate, String dueTime, String priority,
+        //String completed, String notes, String listID
+        while(cursor.moveToNext()) {
+            String name = cursor.getString(1);
+            String taskSort = cursor.getString(2);
+            String taskCompleteHandle = cursor.getString(3);
+            String backgroundColor = cursor.getString(4);
+            Log.i("info", "Current Task Info:" + id + ", " + name + ", " + taskSort
+                    + ", " + taskCompleteHandle + ", " + backgroundColor);
+            list = new List(id, name, taskSort, taskCompleteHandle, backgroundColor);
+        }
+        return list;
     }
 
     public void onResume () {
-        loadData();
         super.onResume();
+        loadData();
     }
 
 }
