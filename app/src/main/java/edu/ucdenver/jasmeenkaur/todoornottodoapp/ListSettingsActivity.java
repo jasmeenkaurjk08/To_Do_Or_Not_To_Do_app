@@ -122,6 +122,7 @@ public class ListSettingsActivity extends AppCompatActivity{
     }
 
     public void onResume () {
+
         super.onResume();
     }
 }

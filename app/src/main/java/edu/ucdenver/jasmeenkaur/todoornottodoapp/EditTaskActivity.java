@@ -92,7 +92,7 @@ public class EditTaskActivity extends DialogFragment {
                         String priority=binding.textInputPriorityEt.getText().toString();
                         String completed="false";
                         String notes=binding.textInputNotesEt.getText().toString();
-                        Log.i("info", "Task to add information in Add Task Dialog: \n\tName: "
+                        Log.i("info", "Task to update in Edit Task Activity: \n\tName: "
                                 + name + "\n\tDue Date: " + dueDate + "\n\tDue Time: " + dueTime +
                                 "\n\tPriority: " + priority + "\n\tCompleted: " + completed +
                                 "\n\tNotes: " + notes + "\n\tList ID: " + listID);

@@ -56,4 +56,11 @@ public class List {
         this.backgroundColor = backgroundColor;
     }
 
+    public void clear(){
+        this.name = "";
+        this.taskSort = "";
+        this.taskCompleteHandle = "";
+        this.backgroundColor = "";
+    }
+
 }

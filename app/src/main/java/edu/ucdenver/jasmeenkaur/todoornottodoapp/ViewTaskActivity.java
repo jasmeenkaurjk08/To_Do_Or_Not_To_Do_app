@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     private DataManager dm;
     private ArrayList<Task> listOfTasks;
     private Task displayTask;
+    private String taskID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,7 +37,7 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbarTaskView);
 
-        String taskID = getIntent().getStringExtra("Task ID");
+        taskID = getIntent().getStringExtra("Task ID");
         Log.i("info", "Task to display ID: " + taskID);
 
         dm = new DataManager(this);
@@ -82,6 +86,22 @@ public class ViewTaskActivity extends AppCompatActivity {
                 }
         );
 
+        binding.checkBox.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton checkBox, boolean checked) {
+                        if(checked){
+                            // checkbox got checked
+                            dm.updateTaskComplete(displayTask.getId(), "true");
+                        }
+                        else {
+                            // checkbox got unchecked
+                            dm.updateTaskComplete(displayTask.getId(), "false");
+                        }
+                    }
+                }
+        );
+
 
     }
 
@@ -109,7 +129,7 @@ public class ViewTaskActivity extends AppCompatActivity {
             EditTaskActivity editTask = new EditTaskActivity(this);
             editTask.show(getSupportFragmentManager(), "");
         }
-
+        loadData();
         return super.onOptionsItemSelected(item);
     }
 
@@ -129,6 +149,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         dm.updateTask(displayTask.getId(), task.getName(), task.getDueDate(), task.getDueTime(), task.getPriority(),
                 task.getNotes());
         //(String id, String name, String dueDate, String dueTime, String priority, String notes)
+        loadData();
     }
 
 
@@ -142,17 +163,15 @@ public class ViewTaskActivity extends AppCompatActivity {
 
 
 
- /*
+
     public void loadData(){
-        // need to know which list we're viewing the tasks of
-        String listId = displayList.getId();
-        String listTaskSort = displayList.getTaskSort();
-        // get that list's tasks
-        Cursor cursor = dm.selectListTasks(listId, listTaskSort);
-        int taskCount = cursor.getCount();
-        listOfTasks.clear();
-        if (taskCount > 0) {
-            while (cursor.moveToNext()) {
+        if(taskID != "0"){
+            Cursor cursor = dm.selectTask(taskID);
+            int listCount = cursor.getCount();
+            Log.i("info", "Number of lists to display: " + listCount);
+            //String id, String name, String dueDate, String dueTime, String priority,
+            //String completed, String notes, String listID
+            while(cursor.moveToNext()) {
                 String id = cursor.getString(0);
                 String name = cursor.getString(1);
                 String dueDate = cursor.getString(2);
@@ -160,14 +179,30 @@ public class ViewTaskActivity extends AppCompatActivity {
                 String priority = cursor.getString(4);
                 String completed = cursor.getString(5);
                 String notes = cursor.getString(6);
-                String listID = cursor.getString(7);
-                Task task = new Task(id, name, dueDate, dueTime, priority, completed, notes, listID);
-                listOfTasks.add(task);
+                String listID= cursor.getString(7);
+                Log.i("info", "Current Task Info:" + id + ", " + name + ", " + dueDate
+                        + ", " + dueTime + ", " + priority+ ", " + completed + ", " + notes);
+                displayTask = new Task(id, name, dueDate, dueTime , priority, completed, notes, listID);
             }
-            taskAdapter.notifyDataSetChanged();
         }
-    }
-*/
+        else{
+            String errorMessage = "ERROR: Could not load task information";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, errorMessage, duration);
+            toast.show();
+        }
 
-    public void onResume () {super.onResume();}
+        binding.textViewTaskNameTv.setText(displayTask.getName());
+        binding.textViewTaskDueDateTv.setText(displayTask.getDueDate());
+        binding.textViewTaskDueTimeTv.setText(displayTask.getDueTime());
+        binding.textViewTaskPriorityTv.setText(displayTask.getPriority());
+        binding.checkBox.setChecked(Boolean.valueOf(displayTask.getCompleted()));
+        binding.textViewNotesTv.setText(displayTask.getNotes());
+    }
+
+
+    public void onResume () {
+        loadData();
+        super.onResume();
+    }
 }

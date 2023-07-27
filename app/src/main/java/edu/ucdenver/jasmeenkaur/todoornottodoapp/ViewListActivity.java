@@ -128,7 +128,7 @@ public class ViewListActivity extends AppCompatActivity{
             Intent listSettingsIntent = new Intent(this, ListSettingsActivity.class);
             listSettingsIntent.putExtra("List ID", displayList.getId());
             startActivity(listSettingsIntent);
-            loadData();
+            //loadData();
         }
         loadData();
         return super.onOptionsItemSelected(item);
@@ -139,9 +139,11 @@ public class ViewListActivity extends AppCompatActivity{
     public void loadData(){
         // need to know which list we're viewing the tasks of
         String listId = displayList.getId();
+        displayList.clear();
         // get all of that list's information
         Cursor cursorList = dm.selectList(listId);
         int listCount = cursorList.getCount();
+        Log.i("info", "Number of LISTS to display: " + listCount);
         if(listCount > 0){
             while (cursorList.moveToNext()) {
                 String name = cursorList.getString(1);
@@ -151,41 +153,46 @@ public class ViewListActivity extends AppCompatActivity{
                 displayList = new List(listId, name, taskSort, taskCompleteHandle, backgroundColor);
             }
         }
-        //String listTaskSort = displayList.getTaskSort();
-        // get that list's tasks
-        Cursor cursorTasks = dm.selectListTasks(listId);
-        if(cursorTasks != null) {
-            Log.i("info", "cursorTasks != null");
-            int taskCount = cursorTasks.getCount();
-            Log.i("info", "Number of tasks to display: " + taskCount);
-            listOfTasks.clear();
-            if (taskCount > 0) {
-                while (cursorTasks.moveToNext()) {
-                    String id = cursorTasks.getString(0);
-                    String name = cursorTasks.getString(1);
-                    String dueDate = cursorTasks.getString(2);
-                    String dueTime = cursorTasks.getString(3);
-                    String priority = cursorTasks.getString(4);
-                    String completed = cursorTasks.getString(5);
-                    String notes = cursorTasks.getString(6);
-                    String listID = cursorTasks.getString(7);
-                    Log.i("info", "Task to be displayed in ViewListActivity: \n\tName: "
-                            + name + "\n\tDue Date: " + dueDate + "\n\tDue Time: " + dueTime +
-                            "\n\tPriority: " + priority + "\n\tCompleted: " + completed +
-                            "\n\tNotes: " + notes + "\n\tList ID: " + listID);
-                    Task task = new Task(id, name, dueDate, dueTime, priority, completed, notes, listID);
-                    listOfTasks.add(task);
-                }
-                taskAdapter.notifyDataSetChanged();
-            }
+        if(displayList.getName()==""){
+            finish();
         }
-        Activity activity = ViewListActivity.activity;
-        LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.viewListViewLayout);
-        bgElement.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
+        else {
+            //String listTaskSort = displayList.getTaskSort();
+            // get that list's tasks
+            Cursor cursorTasks = dm.selectListTasks(listId);
+            if (cursorTasks != null) {
+                Log.i("info", "cursorTasks != null");
+                int taskCount = cursorTasks.getCount();
+                Log.i("info", "Number of tasks to display: " + taskCount);
+                listOfTasks.clear();
+                if (taskCount > 0) {
+                    while (cursorTasks.moveToNext()) {
+                        String id = cursorTasks.getString(0);
+                        String name = cursorTasks.getString(1);
+                        String dueDate = cursorTasks.getString(2);
+                        String dueTime = cursorTasks.getString(3);
+                        String priority = cursorTasks.getString(4);
+                        String completed = cursorTasks.getString(5);
+                        String notes = cursorTasks.getString(6);
+                        String listID = cursorTasks.getString(7);
+                        Log.i("info", "Task to be displayed in ViewListActivity: \n\tName: "
+                                + name + "\n\tDue Date: " + dueDate + "\n\tDue Time: " + dueTime +
+                                "\n\tPriority: " + priority + "\n\tCompleted: " + completed +
+                                "\n\tNotes: " + notes + "\n\tList ID: " + listID);
+                        Task task = new Task(id, name, dueDate, dueTime, priority, completed, notes, listID);
+                        listOfTasks.add(task);
+                    }
+                    taskAdapter.notifyDataSetChanged();
+                }
+            }
+            Activity activity = ViewListActivity.activity;
+            LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.viewListViewLayout);
+            bgElement.setBackgroundColor(Integer.parseInt(displayList.getBackgroundColor()));
 
-        Log.i("info", "Number for Background Color: " + Integer.parseInt(displayList.getBackgroundColor()));
-
-
+            Log.i("info", "Number for Background Color: " + Integer.parseInt(displayList.getBackgroundColor()));
+            binding.textViewListTitle.setText(displayList.getName());
+            taskAdapter.notifyDataSetChanged();
+        }
     }
 
     public void addTask(@NonNull Task task){
@@ -243,8 +250,8 @@ public class ViewListActivity extends AppCompatActivity{
     }
 
     public void onResume () {
-        super.onResume();
         loadData();
+        super.onResume();
     }
 
 }
