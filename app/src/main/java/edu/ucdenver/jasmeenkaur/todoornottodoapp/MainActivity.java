@@ -239,13 +239,14 @@ public class MainActivity extends AppCompatActivity {
                 categoryAdapter.notifyDataSetChanged();
             }
         }
-
+        listAdapter.notifyDataSetChanged();
     }
 
 
 
     public void onResume () {
-        super.onResume();
         loadData();
+        super.onResume();
+
     }
 }
