@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ViewListActivity extends AppCompatActivity{
     private AppBarConfiguration appBarConfiguration;
@@ -30,7 +32,7 @@ public class ViewListActivity extends AppCompatActivity{
     private ArrayList<Task> listOfTasks;
     private List displayList;
     private TaskAdapter taskAdapter;
-
+    RecyclerView recyclerView;
     public static Activity activity;
 
     @Override
@@ -101,22 +103,6 @@ public class ViewListActivity extends AppCompatActivity{
                     }
                 }
         );
-        /*
-        binding.buttonAddTaskLv.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //AppCompatActivity activity= (AppCompatActivity) view.getContext();
-                        //AddTaskActivity addTaskActivity= new AddTaskActivity(ViewListActivity.this);
-                        //startActivity(addTaskActivity);
-                        Intent addTaskIntent = new Intent(ViewListActivity.this, AddTaskActivity.class);
-                        addTaskIntent.putExtra("List ID", displayList.getId());
-                        //startActivity(addTaskIntent);
-                        ViewListActivity.this.startActivity(addTaskIntent);
-                    }
-                }
-        );
-           */
         loadData();
     }
 
@@ -148,9 +134,7 @@ public class ViewListActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public String getDisplayListID(){
-        return displayList.getId();
-    }
+
 
     public void loadData(){
         // need to know which list we're viewing the tasks of
@@ -167,7 +151,7 @@ public class ViewListActivity extends AppCompatActivity{
                 displayList = new List(listId, name, taskSort, taskCompleteHandle, backgroundColor);
             }
         }
-        String listTaskSort = displayList.getTaskSort();
+        //String listTaskSort = displayList.getTaskSort();
         // get that list's tasks
         Cursor cursorTasks = dm.selectListTasks(listId);
         if(cursorTasks != null) {

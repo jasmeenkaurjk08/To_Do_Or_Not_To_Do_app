@@ -24,9 +24,8 @@
         android:textSize="24sp" />
 
     <TableRow
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView5"
@@ -62,89 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/color_wheel_button" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView33"
-            android:layout_width="132dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/list_sort"
-            android:textSize="20sp" />
-
-        <RadioGroup
-            android:id="@+id/radioGroupInputListSortLs"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <RadioButton
-                android:id="@+id/radioButtonDueDateLs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_date" />
-
-            <RadioButton
-                android:id="@+id/radioButtonDueTimeLs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_time" />
-
-            <RadioButton
-                android:id="@+id/radioButtonPriorityLs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_priority" />
-
-            <RadioButton
-                android:id="@+id/radioButtonCategoryLs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_category" />
-        </RadioGroup>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView34"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/completed_tasks"
-            android:textSize="20sp" />
-
-        <RadioGroup
-            android:id="@+id/radioGroupCompletedTaskLs"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/radioButtonShowLs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_show" />
-
-            <RadioButton
-                android:id="@+id/radioButtonHideLs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_hide" />
-
-            <RadioButton
-                android:id="@+id/radioButtonDeleteLs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/button_delete" />
-        </RadioGroup>
     </LinearLayout>
 
     <LinearLayout

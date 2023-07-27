@@ -78,9 +78,6 @@ public class ColorWheelActivity extends AppCompatActivity{
                         // variable its value will be changed as
                         // soon as ok button is clicked from the
                         // color picker dialog.
-                        Activity activity = ListSettingsActivity.activity;
-                        LinearLayout bgElement = (LinearLayout) activity.findViewById(R.id.linearLIstSettings);
-                        bgElement.setBackgroundColor(mDefaultColor);
                         dm.updateListBackgroundColor(listID, String.valueOf(mDefaultColor));
                         Log.i("info", "Color Wheel Activity Color Display: " + mDefaultColor);
                         finish();
