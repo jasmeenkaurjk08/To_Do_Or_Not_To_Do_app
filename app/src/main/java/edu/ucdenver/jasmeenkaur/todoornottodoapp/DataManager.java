@@ -112,7 +112,7 @@ public class DataManager {
 
     public Cursor selectListTasks(String listId) {
         Cursor cursor = null;
-        String query = "select * from task where list_id is \"" + listId;
+        String query = "select * from task where list_id is \"" + listId + "\"";
 
         try {
             cursor = db.rawQuery(query, null);

@@ -201,12 +201,6 @@ public class ViewListActivity extends AppCompatActivity{
 
         Log.i("info", "Number for Background Color: " + Integer.parseInt(displayList.getBackgroundColor()));
 
-        // sort the list
-        String listSort = displayList.getTaskSort();
-
-        switch(listSort){
-            case "due_date":
-        }
 
     }
 
